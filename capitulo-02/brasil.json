@@ -1,0 +1,21 @@
+{
+    "país": "Brasil",
+    "população": 210147125,
+    "PIB total em trilhões de dólares": 3.217,
+    "faz fronteira com": [
+         "Argentina",
+         "Bolívia",
+         "Colômbia",
+         "Guiana Francesa",
+         "Guiana",
+         "Paraguai",
+         "Peru",
+         "Suriname",
+         "Uruguai",
+         "Venezuela"
+    ],
+    "cidades": {
+  	 "capital" : "Brasília",
+  	 "mais populosa": "São Paulo"
+    }
+}

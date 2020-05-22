@@ -1,0 +1,12 @@
+{
+    "ano" : 1992,
+    "tipo" : "Medicina",
+    "autores" : [
+                 "F. Kanda",
+                 "E. Yagi",
+                 "M. Fukuda",
+                 "K. Nakajima",
+                 "T. Ohta",
+                 "O. Nakata"],
+    "premio" : "Elucidação dos Componentes Químicos Responsáveis pelo Chulé do Pé (Elucidation of Chemical Compounds Responsible for Foot Malodour), especialmente pela conclusão de que as pessoas que pensam que têm chulé, têm, e as que pensam que não têm, não têm."
+}
