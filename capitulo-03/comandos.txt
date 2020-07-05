@@ -1,0 +1,483 @@
+ 
+
+> show collections
+capitulo2
+megasena
+> db.megasena.count()
+2541
+> db.megasena.find({"Concurso":73})
+{ "_id" : ObjectId("5f01359061817c01c1286b77"), "Concurso" : 73, "Data Sorteio" : "27/07/1997", "1ª Dezena" : 25, "2ª Dezena" : 26, "3ª Dezena" : 28, "4ª Dezena" : 45, "5ª Dezena" : 51, "6ª Dezena" : 57, "Arrecadacao_Total" : 0, "Ganhadores_Sena" : 1, "Cidade" : "", "UF" : "BA", "Rateio_Sena" : "21026575,4", "Ganhadores_Quina" : 95, "Rateio_Quina" : "21205,27", "Ganhadores_Quadra" : 8222, "Rateio_Quadra" : "244,52", "Acumulado" : "NÃO", "Valor_Acumulado" : 0, "Estimativa_Prêmio" : 0, "Acumulado_Mega_da_Virada" : 0 }
+> db.megasena.findOne()
+{
+        "_id" : ObjectId("5f01359061817c01c1286b2d"),
+        "Concurso" : 2,
+        "Data Sorteio" : "18/03/1996",
+        "1ª Dezena" : 9,
+        "2ª Dezena" : 37,
+        "3ª Dezena" : 39,
+        "4ª Dezena" : 41,
+        "5ª Dezena" : 43,
+        "6ª Dezena" : 49,
+        "Arrecadacao_Total" : 0,
+        "Ganhadores_Sena" : 1,
+        "Cidade" : "",
+        "UF" : "PR",
+        "Rateio_Sena" : "2307162,23",
+        "Ganhadores_Quina" : 65,
+        "Rateio_Quina" : "14424,02",
+        "Ganhadores_Quadra" : 4488,
+        "Rateio_Quadra" : "208,91",
+        "Acumulado" : "NÃO",
+        "Valor_Acumulado" : 0,
+        "Estimativa_Prêmio" : 0,
+        "Acumulado_Mega_da_Virada" : 0
+}
+ 
+> db.megasena.find({"Concurso":73})
+{ "_id" : ObjectId("5f01359061817c01c1286b77"), "Concurso" : 73, "Data Sorteio" : "27/07/1997", "1ª Dezena" : 25, "2ª Dezena" : 26, "3ª Dezena" : 28, "4ª Dezena" : 45, "5ª Dezena" : 51, "6ª Dezena" : 57, "Arrecadacao_Total" : 0, "Ganhadores_Sena" : 1, "Cidade" : "", "UF" : "BA", "Rateio_Sena" : "21026575,4", "Ganhadores_Quina" : 95, "Rateio_Quina" : "21205,27", "Ganhadores_Quadra" : 8222, "Rateio_Quadra" : "244,52", "Acumulado" : "NÃO", "Valor_Acumulado" : 0, "Estimativa_Prêmio" : 0, "Acumulado_Mega_da_Virada" : 0 }
+> db.megasena.find({"Concurso":73}).pretty()
+{
+        "_id" : ObjectId("5f01359061817c01c1286b77"),
+        "Concurso" : 73,
+        "Data Sorteio" : "27/07/1997",
+        "1ª Dezena" : 25,
+        "2ª Dezena" : 26,
+        "3ª Dezena" : 28,
+        "4ª Dezena" : 45,
+        "5ª Dezena" : 51,
+        "6ª Dezena" : 57,
+        "Arrecadacao_Total" : 0,
+        "Ganhadores_Sena" : 1,
+        "Cidade" : "",
+        "UF" : "BA",
+        "Rateio_Sena" : "21026575,4",
+        "Ganhadores_Quina" : 95,
+        "Rateio_Quina" : "21205,27",
+        "Ganhadores_Quadra" : 8222,
+        "Rateio_Quadra" : "244,52",
+        "Acumulado" : "NÃO",
+        "Valor_Acumulado" : 0,
+        "Estimativa_Prêmio" : 0,
+        "Acumulado_Mega_da_Virada" : 0
+}
+> db.megasena.find({"Ganhadores_Sena":5})
+{ "_id" : ObjectId("5f01359061817c01c1286c1c"), "Concurso" : 233, "Data Sorteio" : "19/08/2000", "1ª Dezena" : 3, "2ª Dezena" : 7, "3ª Dezena" : 24, "4ª Dezena" : 32, "5ª Dezena" : 36, "6ª Dezena" : 45, "Arrecadacao_Total" : 0, "Ganhadores_Sena" : 5, "Cidade" : "", "UF" : "DF", "Rateio_Sena" : "3196547,03", "Ganhadores_Quina" : 512, "Rateio_Quina" : "3790,28", "Ganhadores_Quadra" : 21452, "Rateio_Quadra" : "90,2", "Acumulado" : "NÃO", "Valor_Acumulado" : 0, "Estimativa_Prêmio" : 0, "Acumulado_Mega_da_Virada" : 0 }
+{ "_id" : ObjectId("5f01359061817c01c12870e2"), "Concurso" : 1350, "Data Sorteio" : "31/12/2011", "1ª Dezena" : 3, "2ª Dezena" : 4, "3ª Dezena" : 29, "4ª Dezena" : 36, "5ª Dezena" : 45, "6ª Dezena" : 55, "Arrecadacao_Total" : 549326718, "Ganhadores_Sena" : 5, "Cidade" : "RUSSAS", "UF" : "CE", "Rateio_Sena" : "35523497,52", "Ganhadores_Quina" : 954, "Rateio_Quina" : "33711,3", "Ganhadores_Quadra" : 85582, "Rateio_Quadra" : "536,83", "Acumulado" : "NÃO", "Valor_Acumulado" : 0, "Estimativa_Prêmio" : 2500000, "Acumulado_Mega_da_Virada" : 0 }
+> db.megasena.find({"Ganhadores_Sena":5},{"Concurso":1})
+{ "_id" : ObjectId("5f01359061817c01c1286c1c"), "Concurso" : 233 }
+{ "_id" : ObjectId("5f01359061817c01c12870e2"), "Concurso" : 1350 }
+> db.megasena.find({"Ganhadores_Sena":5}, {"Concurso":true,
+...                                            "_id":false})
+{ "Concurso" : 233 }
+{ "Concurso" : 1350 }
+> db.megasena.find({"Ganhadores_Sena":5},{"Concurso":1,
+...                                           "_id":0});
+{ "Concurso" : 233 }
+{ "Concurso" : 1350 }
+> db.ganhadores.count()
+0
+> db.ganhadores.insert({"Concurso":99999,
+...                         "CPF":12345678900})
+WriteResult({ "nInserted" : 1 })
+> db.ganhadores.insert({"Concurso":99999,
+...                         "CPF":12345678900,
+...                         "Nome":"Coffin Joe"})
+WriteResult({ "nInserted" : 1 })
+> db.ganhadores.find().pretty()
+{
+        "_id" : ObjectId("5f01418fd8183384c13bb233"),
+        "Concurso" : 99999,
+        "CPF" : 12345678900
+}
+{
+        "_id" : ObjectId("5f014196d8183384c13bb234"),
+        "Concurso" : 99999,
+        "CPF" : 12345678900,
+        "Nome" : "Coffin Joe"
+}
+> db.valores.insert({"_id" : 111,"valor" : 1000})
+WriteResult({ "nInserted" : 1 })
+> db.valores.insert({"_id" : "importante","valor" : 2000})
+WriteResult({ "nInserted" : 1 })
+> db.valores.insert({"valor" : 3000})
+WriteResult({ "nInserted" : 1 })
+> db.valores.find();
+{ "_id" : 111, "valor" : 1000 }
+{ "_id" : "importante", "valor" : 2000 }
+{ "_id" : ObjectId("5f01430fd8183384c13bb235"), "valor" : 3000 }
+> db.ganhadores.find(
+...  { "_id" : ObjectId("57d09065e741513365fdbb2c")})
+> db.ganhadores.find(  { "_id" : ObjectId("5f014196d8183384c13bb234")})
+{ "_id" : ObjectId("5f014196d8183384c13bb234"), "Concurso" : 99999, "CPF" : 12345678900, "Nome" : "Coffin Joe" }
+> db.ganhadores.update(
+...   {"_id" : ObjectId("5f014196d8183384c13bb234")},
+...   {"Nome":"Zé do caixão"})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.ganhadores.find(
+... { "_id" : ObjectId("5f014196d8183384c13bb234")})
+{ "_id" : ObjectId("5f014196d8183384c13bb234"), "Nome" : "Zé do caixão" }
+> db.ganhadores.update(
+... {"_id" : ObjectId("5f014196d8183384c13bb234")},
+...               { $set: {"Nome":"Zé do caixão"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.ganhadores.find(
+... { "_id" : ObjectId("5f014196d8183384c13bb234")});
+{ "_id" : ObjectId("5f014196d8183384c13bb234"), "Nome" : "Zé do caixão" }
+> db.ganhadores.find()
+{ "_id" : ObjectId("5f01418fd8183384c13bb233"), "Concurso" : 99999, "CPF" : 12345678900 }
+{ "_id" : ObjectId("5f014196d8183384c13bb234"), "Nome" : "Zé do caixão" }
+> db.ganhadores.update({},{ $set: {"CPF": 55555555555 }});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.ganhadores.update({},
+...   { $set: {"CPF": 55555555555 }},{multi:true});
+WriteResult({ "nMatched" : 2, "nUpserted" : 0, "nModified" : 1 })
+> db.ganhadores.find();
+{ "_id" : ObjectId("5f01418fd8183384c13bb233"), "Concurso" : 99999, "CPF" : 55555555555 }
+{ "_id" : ObjectId("5f014196d8183384c13bb234"), "Nome" : "Zé do caixão", "CPF" : 55555555555 }
+> db.ganhadores.update({"Nome" : "Mula sem cabeça"},
+...                        { $set: {"CPF": 33333333333 }},
+...                        {multi:0,upsert:0});
+WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+> db.ganhadores.find();
+{ "_id" : ObjectId("5f01418fd8183384c13bb233"), "Concurso" : 99999, "CPF" : 55555555555 }
+{ "_id" : ObjectId("5f014196d8183384c13bb234"), "Nome" : "Zé do caixão", "CPF" : 55555555555 }
+> db.ganhadores.update({"Nome" : "Mula sem cabeça"},
+...                        { $set: {"CPF": 33333333333 }},
+...                        {multi:0,upsert:1});
+WriteResult({
+        "nMatched" : 0,
+        "nUpserted" : 1,
+        "nModified" : 0,
+        "_id" : ObjectId("5f014bdea759985c7ca61dbd")
+})
+> db.ganhadores.find();
+{ "_id" : ObjectId("5f01418fd8183384c13bb233"), "Concurso" : 99999, "CPF" : 55555555555 }
+{ "_id" : ObjectId("5f014196d8183384c13bb234"), "Nome" : "Zé do caixão", "CPF" : 55555555555 }
+{ "_id" : ObjectId("5f014bdea759985c7ca61dbd"), "Nome" : "Mula sem cabeça", "CPF" : 33333333333 }
+>  db.ganhadores.count()
+3
+> db.ganhadores.find({"CPF" : 33333333333}).count()
+1
+> db.ganhadores.remove({"CPF" : 33333333333})
+WriteResult({ "nRemoved" : 1 })
+> db.ganhadores.count()
+2
+ > db.collectionNovaNaoPrecisaCriarAntes.insert(
+... {"uma coluna":"só"})
+WriteResult({ "nInserted" : 1 })
+> db.collectionNovaNaoPrecisaCriarAntes.count()
+1
+> db.collectionNovaNaoPrecisaCriarAntes.find()
+{ "_id" : ObjectId("5f01512df806b66c50c870a0"), "uma coluna" : "só" }
+> db.collectionNovaNaoPrecisaCriarAntes.drop()
+true
+
+> db.messages.update( {},
+...     { $unset : { titulo: 1 }},
+...     false,true);
+WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+> db.runCommand({
+...  collMod:"ganhadores",
+...  validator: {
+...  "CPF":{$exists:true}
+...  }})
+{ "ok" : 1 }
+> db.ganhadores.insert({"nome":"Sortudo","CPF":123456})
+WriteResult({ "nInserted" : 1 })
+> db.ganhadores.insert({"nome":"Sortudo sem CPF"})
+WriteResult({
+        "nInserted" : 0,
+        "writeError" : {
+                "code" : 121,
+                "errmsg" : "Document failed validation"
+        }
+})
+> db.runCommand({ collMod:"ganhadores", validator:
+...   { "CPF":{$exists:true},
+...   "email": { $regex: /@boaglio\.com$/ }
+... }})
+{ "ok" : 1 }
+> db.ganhadores.insert({"nome":"Sortudo","CPF":123,
+...   "email":"email@gmail.com"})
+WriteResult({
+        "nInserted" : 0,
+        "writeError" : {
+                "code" : 121,
+                "errmsg" : "Document failed validation"
+        }
+})
+> db.ganhadores.insert({"nome":"Sortudo","CPF":123,
+...   "email":"email@boaglio.com"})
+WriteResult({ "nInserted" : 1 })
+> 
+> db.runCommand({ collMod:"ganhadores", validator:
+...  { "CPF":{$exists:true,$type:"string"},
+...  "email": { $regex: /@boaglio\.com$/ }
+...  }})
+{ "ok" : 1 }
+> db.ganhadores.insert({"nome":"Sortudo","CPF":"W123W","email":"email@boaglio.com"})
+WriteResult({ "nInserted" : 1 })
+> db.ganhadores.insert({"nome":"Sortudo","CPF":123,
+...   "email":"email@boaglio.com"})
+WriteResult({
+        "nInserted" : 0,
+        "writeError" : {
+                "code" : 121,
+                "errmsg" : "Document failed validation"
+        }
+})
+> db.megasena.find({"Data Sorteio":/2009/}).count()
+105
+> db.megasena.find({"Data Sorteio":{$regex:'2009'}}).count()
+105
+> db.megasena.find({"Acumulado":/SI/}).count()
+1747
+> db.megasena.find({"Acumulado":/si/}).count()
+0
+> db.createCollection("cacheDeDoisdocumentos",
+...       { capped: true, size: 4096,
+...         max: 2 })
+{ "ok" : 1 }
+> db.cacheDeDoisdocumentos.insert({"nome":"teste 1"})
+WriteResult({ "nInserted" : 1 })
+> db.cacheDeDoisdocumentos.insert({"nome":"teste 2"})
+WriteResult({ "nInserted" : 1 })
+> db.cacheDeDoisdocumentos.insert({"nome":"teste 3"})
+WriteResult({ "nInserted" : 1 })
+> db.cacheDeDoisdocumentos.insert({"nome":"teste 4"})
+WriteResult({ "nInserted" : 1 })
+> db.cacheDeDoisdocumentos.count()
+2
+> db.cacheDeDoisdocumentos.find()
+{ "_id" : ObjectId("5f01583472aebb14254a2ccb"), "nome" : "teste 3" }
+{ "_id" : ObjectId("5f01583972aebb14254a2ccc"), "nome" : "teste 4" }
+
+> db.cacheDeDoisdocumentos.remove({"nome" : "teste 4" });
+WriteResult({
+        "nRemoved" : 0,
+        "writeError" : {
+                "code" : 20,
+                "errmsg" : "cannot remove from a capped collection: test.cacheDeDoisdocumentos"
+        }
+})
+> show collections
+cacheDeDoisdocumentos
+capitulo2
+ganhadores
+megasena
+valores
+> db.collectionNormal({nome:"outro teste"})
+2020-07-05T02:56:44.264-0300 E  QUERY    [js] uncaught exception: TypeError: db.collectionNormal is not a function :
+@(shell):1:1
+> db.collectionNormal.insert({nome:"outro teste"})
+WriteResult({ "nInserted" : 1 })
+> db.runCommand({convertToCapped:'collectionNormal',size:8192})
+{ "ok" : 1 }
+> db.collectionNormal.st
+db.collectionNormal.stats(        db.collectionNormal.storageSize(
+> db.collectionNormal.stats()
+{
+        "ns" : "test.collectionNormal",
+        "size" : 44,
+        "count" : 1,
+        "avgObjSize" : 44,
+        "storageSize" : 4096,
+        "capped" : true,
+        "max" : -1,
+        "maxSize" : 8192,
+        "sleepCount" : 0,
+        "sleepMS" : 0,
+        "wiredTiger" : {
+                "metadata" : {
+                        "formatVersion" : 1
+                },
+                "creationString" : "access_pattern_hint=none,allocation_size=4KB,app_metadata=(formatVersion=1),assert=(commit_timestamp=none,durable_timestamp=none,read_timestamp=none),block_allocation=best,block_compressor=snappy,cache_resident=false,checksum=on,colgroups=,collator=,columns=,dictionary=0,encryption=(keyid=,name=),exclusive=false,extractor=,format=btree,huffman_key=,huffman_value=,ignore_in_memory_cache_size=false,immutable=false,internal_item_max=0,internal_key_max=0,internal_key_truncate=true,internal_page_max=4KB,key_format=q,key_gap=10,leaf_item_max=0,leaf_key_max=0,leaf_page_max=32KB,leaf_value_max=64MB,log=(enabled=true),lsm=(auto_throttle=true,bloom=true,bloom_bit_count=16,bloom_config=,bloom_hash_count=8,bloom_oldest=false,chunk_count_limit=0,chunk_max=5GB,chunk_size=10MB,merge_custom=(prefix=,start_generation=0,suffix=),merge_max=15,merge_min=0),memory_page_image_max=0,memory_page_max=10m,os_cache_dirty_max=0,os_cache_max=0,prefix_compression=false,prefix_compression_min=4,source=,split_deepen_min_child=0,split_deepen_per_child=0,split_pct=90,type=file,value_format=u",
+                "type" : "file",
+                "uri" : "statistics:table:collection-14-7660348412238776836",
+                "LSM" : {
+                        "bloom filter false positives" : 0,
+                        "bloom filter hits" : 0,
+                        "bloom filter misses" : 0,
+                        "bloom filter pages evicted from cache" : 0,
+                        "bloom filter pages read into cache" : 0,
+                        "bloom filters in the LSM tree" : 0,
+                        "chunks in the LSM tree" : 0,
+                        "highest merge generation in the LSM tree" : 0,
+                        "queries that could have benefited from a Bloom filter that did not exist" : 0,
+                        "sleep for LSM checkpoint throttle" : 0,
+                        "sleep for LSM merge throttle" : 0,
+                        "total size of bloom filters" : 0
+                },
+                "block-manager" : {
+                        "allocations requiring file extension" : 0,
+                        "blocks allocated" : 0,
+                        "blocks freed" : 0,
+                        "checkpoint size" : 0,
+                        "file allocation unit size" : 4096,
+                        "file bytes available for reuse" : 0,
+                        "file magic number" : 120897,
+                        "file major version number" : 1,
+                        "file size in bytes" : 4096,
+                        "minor version number" : 0
+                },
+                "btree" : {
+                        "btree checkpoint generation" : 0,
+                        "column-store fixed-size leaf pages" : 0,
+                        "column-store internal pages" : 0,
+                        "column-store variable-size RLE encoded values" : 0,
+                        "column-store variable-size deleted values" : 0,
+                        "column-store variable-size leaf pages" : 0,
+                        "fixed-record size" : 0,
+                        "maximum internal page key size" : 368,
+                        "maximum internal page size" : 4096,
+                        "maximum leaf page key size" : 2867,
+                        "maximum leaf page size" : 32768,
+                        "maximum leaf page value size" : 67108864,
+                        "maximum tree depth" : 3,
+                        "number of key/value pairs" : 0,
+                        "overflow pages" : 0,
+                        "pages rewritten by compaction" : 0,
+                        "row-store empty values" : 0,
+                        "row-store internal pages" : 0,
+                        "row-store leaf pages" : 0
+                },
+                "cache" : {
+                        "bytes currently in the cache" : 900,
+                        "bytes dirty in the cache cumulative" : 406,
+                        "bytes read into cache" : 0,
+                        "bytes written from cache" : 0,
+                        "checkpoint blocked page eviction" : 0,
+                        "data source pages selected for eviction unable to be evicted" : 0,
+                        "eviction walk passes of a file" : 0,
+                        "eviction walk target pages histogram - 0-9" : 0,
+                        "eviction walk target pages histogram - 10-31" : 0,
+                        "eviction walk target pages histogram - 128 and higher" : 0,
+                        "eviction walk target pages histogram - 32-63" : 0,
+                        "eviction walk target pages histogram - 64-128" : 0,
+                        "eviction walks abandoned" : 0,
+                        "eviction walks gave up because they restarted their walk twice" : 0,
+                        "eviction walks gave up because they saw too many pages and found no candidates" : 0,
+                        "eviction walks gave up because they saw too many pages and found too few candidates" : 0,
+                        "eviction walks reached end of tree" : 0,
+                        "eviction walks started from root of tree" : 0,
+                        "eviction walks started from saved location in tree" : 0,
+                        "hazard pointer blocked page eviction" : 0,
+                        "in-memory page passed criteria to be split" : 0,
+                        "in-memory page splits" : 0,
+                        "internal pages evicted" : 0,
+                        "internal pages split during eviction" : 0,
+                        "leaf pages split during eviction" : 0,
+                        "modified pages evicted" : 0,
+                        "overflow pages read into cache" : 0,
+                        "page split during eviction deepened the tree" : 0,
+                        "page written requiring cache overflow records" : 0,
+                        "pages read into cache" : 0,
+                        "pages read into cache after truncate" : 1,
+                        "pages read into cache after truncate in prepare state" : 0,
+                        "pages read into cache requiring cache overflow entries" : 0,
+                        "pages requested from the cache" : 1,
+                        "pages seen by eviction walk" : 0,
+                        "pages written from cache" : 0,
+                        "pages written requiring in-memory restoration" : 0,
+                        "tracked dirty bytes in the cache" : 718,
+                        "unmodified pages evicted" : 0
+                },
+                "cache_walk" : {
+                        "Average difference between current eviction generation when the page was last considered" : 0,
+                        "Average on-disk page image size seen" : 0,
+                        "Average time in cache for pages that have been visited by the eviction server" : 0,
+                        "Average time in cache for pages that have not been visited by the eviction server" : 0,
+                        "Clean pages currently in cache" : 0,
+                        "Current eviction generation" : 0,
+                        "Dirty pages currently in cache" : 0,
+                        "Entries in the root page" : 0,
+                        "Internal pages currently in cache" : 0,
+                        "Leaf pages currently in cache" : 0,
+                        "Maximum difference between current eviction generation when the page was last considered" : 0,
+                        "Maximum page size seen" : 0,
+                        "Minimum on-disk page image size seen" : 0,
+                        "Number of pages never visited by eviction server" : 0,
+                        "On-disk page image sizes smaller than a single allocation unit" : 0,
+                        "Pages created in memory and never written" : 0,
+                        "Pages currently queued for eviction" : 0,
+                        "Pages that could not be queued for eviction" : 0,
+                        "Refs skipped during cache traversal" : 0,
+                        "Size of the root page" : 0,
+                        "Total number of pages currently in cache" : 0
+                },
+                "compression" : {
+                        "compressed page maximum internal page size prior to compression" : 4096,
+                        "compressed page maximum leaf page size prior to compression " : 131072,
+                        "compressed pages read" : 0,
+                        "compressed pages written" : 0,
+                        "page written failed to compress" : 0,
+                        "page written was too small to compress" : 0
+                },
+                "cursor" : {
+                        "bulk loaded cursor insert calls" : 0,
+                        "cache cursors reuse count" : 0,
+                        "close calls that result in cache" : 0,
+                        "create calls" : 2,
+                        "insert calls" : 1,
+                        "insert key and value bytes" : 45,
+                        "modify" : 0,
+                        "modify key and value bytes affected" : 0,
+                        "modify value bytes modified" : 0,
+                        "next calls" : 0,
+                        "open cursor count" : 0,
+                        "operation restarted" : 0,
+                        "prev calls" : 1,
+                        "remove calls" : 0,
+                        "remove key bytes removed" : 0,
+                        "reserve calls" : 0,
+                        "reset calls" : 4,
+                        "search calls" : 0,
+                        "search near calls" : 0,
+                        "truncate calls" : 0,
+                        "update calls" : 0,
+                        "update key and value bytes" : 0,
+                        "update value size change" : 0
+                },
+                "reconciliation" : {
+                        "dictionary matches" : 0,
+                        "fast-path pages deleted" : 0,
+                        "internal page key bytes discarded using suffix compression" : 0,
+                        "internal page multi-block writes" : 0,
+                        "internal-page overflow keys" : 0,
+                        "leaf page key bytes discarded using prefix compression" : 0,
+                        "leaf page multi-block writes" : 0,
+                        "leaf-page overflow keys" : 0,
+                        "maximum blocks required for a page" : 0,
+                        "overflow values written" : 0,
+                        "page checksum matches" : 0,
+                        "page reconciliation calls" : 0,
+                        "page reconciliation calls for eviction" : 0,
+                        "pages deleted" : 0
+                },
+                "session" : {
+                        "object compaction" : 0
+                },
+                "transaction" : {
+                        "update conflicts" : 0
+                }
+        },
+        "nindexes" : 1,
+        "indexBuilds" : [ ],
+        "totalIndexSize" : 4096,
+        "indexSizes" : {
+                "_id_" : 4096
+        },
+        "scaleFactor" : 1,
+        "ok" : 1
+}
+> db.valores.find();
+{ "_id" : 111, "valor" : 1000 }
+{ "_id" : "importante", "valor" : 2000 }
+{ "_id" : ObjectId("5f01430fd8183384c13bb235"), "valor" : 3000 }
+> db.valores.insert({"valor":4000,taxa:"15%"})
+WriteResult({ "nInserted" : 1 })
+> db.valores.find({taxa:{$exists:true}})
+{ "_id" : ObjectId("5f0170a872aebb14254a2cce"), "valor" : 4000, "taxa" : "15%" }
+> 
+> exit
+bye
