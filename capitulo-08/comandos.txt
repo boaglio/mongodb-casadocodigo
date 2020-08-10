@@ -1,0 +1,93 @@
+
+
+>        db.megasena.find({ "Ganhadores_Sena" :
+...           { $gt:4} }).count();
+8
+> db.megasena.find({"Ganhadores_Sena":{$in:[5,6,7]}}).count()
+5
+> db.megasena.find({"Ganhadores_Sena":{$ne:7}}).count()
+2540
+> db.megasena.find({"Ganhadores_Sena":{$in:[7]}}).count()
+1
+> db.megasena.find().count()
+2541
+> db.megasena.find({"Ganhadores_Sena":{$nin:[5,6,7]}}).count();
+2536
+> db.megasena.find({"Ganhadores_Sena":{$in:[5,6,7]}}).count();
+5
+> db.megasena.distinct("Ganhadores_Sena")
+[ 0, 1, 2, 3, 4, 5, 6, 7, 15, 17, 52, "" ]
+> db.megasena.find({ "Acumulado": { $regex: /^\d.*$/ } })
+> db.megasena.find({ "Arrecadacao_Total": { $regex: /^\d.*$/ } }).count()
+336
+> db.megasena.find({ $or:
+...    [ {"Ganhadores_Sena":{ $eq:5 } },
+...      {"Ganhadores_Sena":{ $eq:7 } }]
+...     }).count()
+3
+> db.megasena.find({ $or:
+...    [ {"Ganhadores_Sena":5},
+...      {"Ganhadores_Sena":7}]
+...     }).count()
+3
+> db.megasena.find({"Ganhadores_Sena":{$in:[5,7]} }).count()
+3
+> db.megasena.insert({"obs": "sem sorteio"})
+WriteResult({ "nInserted" : 1 })
+> db.megasena.find().count()
+2542
+> db.megasena.find({"obs":{$exists:true}}).count()
+1
+> db.megasena.find({"obs":{$exists:false}}).count()
+2541
+> db.seriados.find({ "nome": /bad/},{"nome":1,"_id":0})
+> db.seriados.find({ "nome": /bad/i},{"nome":1,"_id":0})
+{ "nome" : "Breaking Bad" }
+> db.seriados.find({ "nome": /ad/},{"nome":1,"_id":0})
+{ "nome" : "Breaking Bad" }
+{ "nome" : "Carga Pesada" }
+> db.seriados.find({ "nome": /ad$/},{"nome":1,"_id":0})
+{ "nome" : "Breaking Bad" }
+> db.seriados.find({ "nome": /^Ba/},{"nome":1,"_id":0})
+> db.seriados.find({ "nome": /^Br/},{"nome":1,"_id":0})
+{ "nome" : "Breaking Bad" }
+> db.seriados.find({},{_id:0,nome:1}).sort({nome:1})
+{ "nome" : "3% - 3 por cento" }
+{ "nome" : "Breaking Bad" }
+{ "nome" : "Carga Pesada" }
+{ "nome" : "Chaves" }
+> db.seriados.find({},{_id:0,nome:1}).sort({nome:-1})
+{ "nome" : "Chaves" }
+{ "nome" : "Carga Pesada" }
+{ "nome" : "Breaking Bad" }
+{ "nome" : "3% - 3 por cento" }
+> db.seriados.find({},{_id:0,nome:1})
+{ "nome" : "Breaking Bad" }
+{ "nome" : "Chaves" }
+{ "nome" : "Carga Pesada" }
+{ "nome" : "3% - 3 por cento" }
+> db.seriados.find({},{_id:0,nome:1}).limit(1)
+{ "nome" : "Breaking Bad" }
+> db.seriados.find({},{_id:0,nome:1})
+{ "nome" : "Breaking Bad" }
+{ "nome" : "Chaves" }
+{ "nome" : "Carga Pesada" }
+{ "nome" : "3% - 3 por cento" }
+> db.seriados.find({},{_id:0,nome:1}).limit(1).skip(2)
+{ "nome" : "Carga Pesada" }
+>  db.seriados.find({},{_id:0,nome:1}).sort({"_id":-1}).limit(1)
+{ "nome" : "Carga Pesada" }
+> db.funcionarios.update(
+...    {"_id" : ObjectId("57d08d348688b893a04c3e8d")} ,
+...    { $inc: { "salario" : 500 }
+... })
+WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+> 
+> db.municipios.ensureIndex( { loc : "2d" } )
+{
+        "numIndexesBefore" : 2,
+        "numIndexesAfter" : 2,
+        "note" : "all indexes already exist",
+        "ok" : 1
+}
+> 
