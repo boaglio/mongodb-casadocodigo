@@ -1,0 +1,447 @@
+> db.compras.insert({_id:1,produto:"Microondas",valor:2000,taxa:0.60})
+WriteResult({ "nInserted" : 1 })
+> db.compras.insert({_id:1,produto:"Bicicleta",valor:1000,taxa:0.46})
+WriteResult({ "nInserted" : 1 })
+> db.compras.insert({_id:2,produto:"Microondas",valor:2000,taxa:0.60})
+WriteResult({ "nInserted" : 1 })
+> db.compras.insert({_id:3,produto:"Caneta",valor:4,taxa:0.50})
+WriteResult({ "nInserted" : 1 })
+> db.compras.aggregate({ "$project" :
+...        {
+...           "valor" : "$valor",
+...           "taxa" : "$taxa",
+...           "Total" : { "$multiply" : [ "$valor", "$taxa"] },
+...        }
+...     }
+... )
+{ "_id" : 1, "valor" : 1000, "taxa" : 0.46, "Total" : 460 }
+{ "_id" : 2, "valor" : 2000, "taxa" : 0.6, "Total" : 1200 }
+{ "_id" : 3, "valor" : 4, "taxa" : 0.5, "Total" : 2 }
+> db.compras.find({$where: "imposto(this.valor, this.taxa) > 1000"});
+{ "_id" : 2, "produto" : "Microondas", "valor" : 2000, "taxa" : 0.6 }
+> 
+> use admin
+switched to db admin
+> db.createUser({user: "admin",
+...                 pwd: "minhasenha",
+...              roles:[ "userAdminAnyDatabase",
+...                      "dbAdminAnyDatabase",
+...                      "readWriteAnyDatabase"]})
+Successfully added user: {
+        "user" : "admin",
+        "roles" : [
+                "userAdminAnyDatabase",
+                "dbAdminAnyDatabase",
+                "readWriteAnyDatabase"
+        ]
+}
+> db.createUser({user: "outroAdmin",
+...                 pwd: "minhasenha",
+...               roles:[ "userAdminAnyDatabase",
+...                       "dbAdminAnyDatabase",
+...                       "readWriteAnyDatabase"]})
+Successfully added user: {
+        "user" : "outroAdmin",
+        "roles" : [
+                "userAdminAnyDatabase",
+                "dbAdminAnyDatabase",
+                "readWriteAnyDatabase"
+        ]
+}
+> 
+> db.currentOp()
+{
+        "inprog" : [
+                {
+                        "type" : "op",
+                        "host" : "c2bf15227038:27017",
+                        "desc" : "waitForMajority",
+                        "active" : true,
+                        "currentOpTime" : "2020-08-31T02:03:07.795+0000",
+                        "opid" : 2,
+                        "op" : "none",
+                        "ns" : "",
+                        "command" : {
+
+                        },
+                        "numYields" : 0,
+                        "waitingForLatch" : {
+                                "timestamp" : ISODate("2020-08-31T01:41:31.469Z"),
+                                "captureName" : "WaitForMaorityService::_mutex"
+                        },
+                        "locks" : {
+
+                        },
+                        "waitingForLock" : false,
+                        "lockStats" : {
+
+                        },
+                        "waitingForFlowControl" : false,
+                        "flowControlStats" : {
+
+                        }
+                },
+                {
+                        "type" : "op",
+                        "host" : "c2bf15227038:27017",
+                        "desc" : "conn18",
+                        "connectionId" : 18,
+                        "client" : "172.17.0.1:51490",
+                        "appName" : "MongoDB Shell",
+                        "clientMetadata" : {
+                                "application" : {
+                                        "name" : "MongoDB Shell"
+                                },
+                                "driver" : {
+                                        "name" : "MongoDB Internal Client",
+                                        "version" : "4.4.0"
+                                },
+                                "os" : {
+                                        "type" : "Linux",
+                                        "name" : "Arch",
+                                        "architecture" : "x86_64",
+                                        "version" : "rolling"
+                                }
+                        },
+                        "active" : true,
+                        "currentOpTime" : "2020-08-31T02:03:07.795+0000",
+                        "opid" : 3410,
+                        "lsid" : {
+                                "id" : UUID("a9877de5-ecb9-4518-9cf5-edd1e92217d0"),
+                                "uid" : BinData(0,"47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=")
+                        },
+                        "secs_running" : NumberLong(0),
+                        "microsecs_running" : NumberLong(27355),
+                        "op" : "command",
+                        "ns" : "admin.$cmd.aggregate",
+                        "command" : {
+                                "currentOp" : 1,
+                                "lsid" : {
+                                        "id" : UUID("a9877de5-ecb9-4518-9cf5-edd1e92217d0")
+                                },
+                                "$db" : "admin"
+                        },
+                        "numYields" : 0,
+                        "locks" : {
+
+                        },
+                        "waitingForLock" : false,
+                        "lockStats" : {
+
+                        },
+                        "waitingForFlowControl" : false,
+                        "flowControlStats" : {
+
+                        }
+                }
+        ],
+        "ok" : 1
+}
+> db.currentOp(true)
+{
+        "inprog" : [
+                {
+                        "type" : "op",
+                        "host" : "c2bf15227038:27017",
+                        "desc" : "conn8",
+                        "connectionId" : 8,
+                        "client" : "172.17.0.1:51270",
+                        "appName" : "MongoDB Shell",
+                        "clientMetadata" : {
+                                "application" : {
+                                        "name" : "MongoDB Shell"
+                                },
+                                "driver" : {
+                                        "name" : "MongoDB Internal Client",
+                                        "version" : "4.2.6-17-g6bce88c"
+                                },
+                                "os" : {
+                                        "type" : "Linux",
+                                        "name" : "Arch",
+                                        "architecture" : "x86_64",
+                                        "version" : "rolling"
+                                }
+                        },
+                        "active" : false,
+                        "currentOpTime" : "2020-08-31T02:03:38.411+0000"
+                },
+                {
+                        "type" : "op",
+                        "host" : "c2bf15227038:27017",
+                        "desc" : "conn7",
+                        "connectionId" : 7,
+                        "client" : "172.17.0.1:51266",
+                        "appName" : "robo3t-1.4.0",
+                        "clientMetadata" : {
+                                "application" : {
+                                        "name" : "robo3t-1.4.0"
+                                },
+                                "driver" : {
+                                        "name" : "MongoDB Internal Client",
+                                        "version" : "4.2.6-17-g6bce88c"
+                                },
+                                "os" : {
+                                        "type" : "Linux",
+                                        "name" : "Arch",
+                                        "architecture" : "x86_64",
+                                        "version" : "rolling"
+                                }
+                        },
+                        "active" : false,
+                        "currentOpTime" : "2020-08-31T02:03:38.411+0000"
+                },
+                {
+                        "type" : "op",
+                        "host" : "c2bf15227038:27017",
+                        "desc" : "SessionKiller",
+                        "active" : false,
+                        "currentOpTime" : "2020-08-31T02:03:38.411+0000"
+                },
+                {
+                        "type" : "op",
+                        "host" : "c2bf15227038:27017",
+                        "desc" : "TimestampMonitor",
+                        "active" : false,
+                        "currentOpTime" : "2020-08-31T02:03:38.411+0000"
+                },
+                {
+                        "type" : "op",
+                        "host" : "c2bf15227038:27017",
+                        "desc" : "ftdc",
+                        "active" : false,
+                        "currentOpTime" : "2020-08-31T02:03:38.411+0000"
+                },
+                {
+                        "type" : "op",
+                        "host" : "c2bf15227038:27017",
+                        "desc" : "conn13",
+                        "connectionId" : 13,
+                        "client" : "172.17.0.1:51434",
+                        "appName" : "robo3t-1.4.0",
+                        "clientMetadata" : {
+                                "application" : {
+                                        "name" : "robo3t-1.4.0"
+                                },
+                                "driver" : {
+                                        "name" : "MongoDB Internal Client",
+                                        "version" : "4.2.6-17-g6bce88c"
+                                },
+                                "os" : {
+                                        "type" : "Linux",
+                                        "name" : "Arch",
+                                        "architecture" : "x86_64",
+                                        "version" : "rolling"
+                                }
+                        },
+                        "active" : false,
+                        "currentOpTime" : "2020-08-31T02:03:38.411+0000"
+                },
+                {
+                        "type" : "op",
+                        "host" : "c2bf15227038:27017",
+                        "desc" : "initandlisten",
+                        "active" : false,
+                        "currentOpTime" : "2020-08-31T02:03:38.411+0000"
+                },
+                {
+                        "type" : "op",
+                        "host" : "c2bf15227038:27017",
+                        "desc" : "waitForMajority",
+                        "active" : true,
+                        "currentOpTime" : "2020-08-31T02:03:38.411+0000",
+                        "opid" : 2,
+                        "op" : "none",
+                        "ns" : "",
+                        "command" : {
+
+                        },
+                        "numYields" : 0,
+                        "waitingForLatch" : {
+                                "timestamp" : ISODate("2020-08-31T01:41:31.469Z"),
+                                "captureName" : "WaitForMaorityService::_mutex"
+                        },
+                        "locks" : {
+
+                        },
+                        "waitingForLock" : false,
+                        "lockStats" : {
+
+                        },
+                        "waitingForFlowControl" : false,
+                        "flowControlStats" : {
+
+                        }
+                },
+                {
+                        "type" : "op",
+                        "host" : "c2bf15227038:27017",
+                        "desc" : "LogicalSessionCacheReap",
+                        "active" : false,
+                        "currentOpTime" : "2020-08-31T02:03:38.411+0000"
+                },
+                {
+                        "type" : "op",
+                        "host" : "c2bf15227038:27017",
+                        "desc" : "FlowControlRefresher",
+                        "active" : false,
+                        "currentOpTime" : "2020-08-31T02:03:38.411+0000"
+                },
+                {
+                        "type" : "op",
+                        "host" : "c2bf15227038:27017",
+                        "desc" : "WTIdleSessionSweeper",
+                        "active" : false,
+                        "currentOpTime" : "2020-08-31T02:03:38.411+0000"
+                },
+                {
+                        "type" : "op",
+                        "host" : "c2bf15227038:27017",
+                        "desc" : "FreeMonHTTP-0",
+                        "active" : false,
+                        "currentOpTime" : "2020-08-31T02:03:38.411+0000"
+                },
+                {
+                        "type" : "op",
+                        "host" : "c2bf15227038:27017",
+                        "desc" : "LogicalSessionCacheRefresh",
+                        "active" : false,
+                        "currentOpTime" : "2020-08-31T02:03:38.411+0000"
+                },
+                {
+                        "type" : "op",
+                        "host" : "c2bf15227038:27017",
+                        "desc" : "abortExpiredTransactions",
+                        "active" : false,
+                        "currentOpTime" : "2020-08-31T02:03:38.411+0000"
+                },
+                {
+                        "type" : "op",
+                        "host" : "c2bf15227038:27017",
+                        "desc" : "WTCheckpointThread",
+                        "active" : false,
+                        "currentOpTime" : "2020-08-31T02:03:38.411+0000"
+                },
+                {
+                        "type" : "op",
+                        "host" : "c2bf15227038:27017",
+                        "desc" : "WTJournalFlusher",
+                        "active" : false,
+                        "currentOpTime" : "2020-08-31T02:03:38.411+0000"
+                },
+                {
+                        "type" : "op",
+                        "host" : "c2bf15227038:27017",
+                        "desc" : "startPeriodicThreadToDecreaseSnapshotHistoryCachePressure",
+                        "active" : false,
+                        "currentOpTime" : "2020-08-31T02:03:38.411+0000"
+                },
+                {
+                        "type" : "op",
+                        "host" : "c2bf15227038:27017",
+                        "desc" : "FreeMonProcessor",
+                        "active" : false,
+                        "currentOpTime" : "2020-08-31T02:03:38.411+0000"
+                },
+                {
+                        "type" : "op",
+                        "host" : "c2bf15227038:27017",
+                        "desc" : "conn14",
+                        "connectionId" : 14,
+                        "client" : "172.17.0.1:51438",
+                        "appName" : "MongoDB Shell",
+                        "clientMetadata" : {
+                                "application" : {
+                                        "name" : "MongoDB Shell"
+                                },
+                                "driver" : {
+                                        "name" : "MongoDB Internal Client",
+                                        "version" : "4.2.6-17-g6bce88c"
+                                },
+                                "os" : {
+                                        "type" : "Linux",
+                                        "name" : "Arch",
+                                        "architecture" : "x86_64",
+                                        "version" : "rolling"
+                                }
+                        },
+                        "active" : false,
+                        "currentOpTime" : "2020-08-31T02:03:38.411+0000"
+                },
+                {
+                        "type" : "op",
+                        "host" : "c2bf15227038:27017",
+                        "desc" : "TTLMonitor",
+                        "active" : false,
+                        "currentOpTime" : "2020-08-31T02:03:38.411+0000",
+                        "effectiveUsers" : [
+                                {
+                                        "user" : "__system",
+                                        "db" : "local"
+                                }
+                        ]
+                },
+                {
+                        "type" : "op",
+                        "host" : "c2bf15227038:27017",
+                        "desc" : "conn18",
+                        "connectionId" : 18,
+                        "client" : "172.17.0.1:51490",
+                        "appName" : "MongoDB Shell",
+                        "clientMetadata" : {
+                                "application" : {
+                                        "name" : "MongoDB Shell"
+                                },
+                                "driver" : {
+                                        "name" : "MongoDB Internal Client",
+                                        "version" : "4.4.0"
+                                },
+                                "os" : {
+                                        "type" : "Linux",
+                                        "name" : "Arch",
+                                        "architecture" : "x86_64",
+                                        "version" : "rolling"
+                                }
+                        },
+                        "active" : true,
+                        "currentOpTime" : "2020-08-31T02:03:38.411+0000",
+                        "opid" : 3492,
+                        "lsid" : {
+                                "id" : UUID("a9877de5-ecb9-4518-9cf5-edd1e92217d0"),
+                                "uid" : BinData(0,"47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=")
+                        },
+                        "secs_running" : NumberLong(0),
+                        "microsecs_running" : NumberLong(152),
+                        "op" : "command",
+                        "ns" : "admin.$cmd.aggregate",
+                        "command" : {
+                                "currentOp" : 1,
+                                "$all" : true,
+                                "lsid" : {
+                                        "id" : UUID("a9877de5-ecb9-4518-9cf5-edd1e92217d0")
+                                },
+                                "$db" : "admin"
+                        },
+                        "numYields" : 0,
+                        "locks" : {
+
+                        },
+                        "waitingForLock" : false,
+                        "lockStats" : {
+
+                        },
+                        "waitingForFlowControl" : false,
+                        "flowControlStats" : {
+
+                        }
+                },
+                {
+                        "type" : "op",
+                        "host" : "c2bf15227038:27017",
+                        "desc" : "clientcursormon",
+                        "active" : false,
+                        "currentOpTime" : "2020-08-31T02:03:38.411+0000"
+                }
+        ],
+        "ok" : 1
+}
+> exit

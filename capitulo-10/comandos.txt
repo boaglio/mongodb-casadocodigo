@@ -1,0 +1,1021 @@
+> db.filmes.find({"ano" :"1999"}).explain('executionStats')
+{
+        "queryPlanner" : {
+                "plannerVersion" : 1,
+                "namespace" : "test.filmes",
+                "indexFilterSet" : false,
+                "parsedQuery" : {
+                        "ano" : {
+                                "$eq" : "1999"
+                        }
+                },
+                "winningPlan" : {
+                        "stage" : "FETCH",
+                        "inputStage" : {
+                                "stage" : "IXSCAN",
+                                "keyPattern" : {
+                                        "ano" : 1
+                                },
+                                "indexName" : "ano_1",
+                                "isMultiKey" : false,
+                                "multiKeyPaths" : {
+                                        "ano" : [ ]
+                                },
+                                "isUnique" : false,
+                                "isSparse" : false,
+                                "isPartial" : false,
+                                "indexVersion" : 2,
+                                "direction" : "forward",
+                                "indexBounds" : {
+                                        "ano" : [
+                                                "[\"1999\", \"1999\"]"
+                                        ]
+                                }
+                        }
+                },
+                "rejectedPlans" : [
+                        {
+                                "stage" : "FETCH",
+                                "inputStage" : {
+                                        "stage" : "IXSCAN",
+                                        "keyPattern" : {
+                                                "ano" : 1,
+                                                "nota" : -1
+                                        },
+                                        "indexName" : "ano_1_nota_-1",
+                                        "isMultiKey" : false,
+                                        "multiKeyPaths" : {
+                                                "ano" : [ ],
+                                                "nota" : [ ]
+                                        },
+                                        "isUnique" : false,
+                                        "isSparse" : false,
+                                        "isPartial" : false,
+                                        "indexVersion" : 2,
+                                        "direction" : "forward",
+                                        "indexBounds" : {
+                                                "ano" : [
+                                                        "[\"1999\", \"1999\"]"
+                                                ],
+                                                "nota" : [
+                                                        "[MaxKey, MinKey]"
+                                                ]
+                                        }
+                                }
+                        }
+                ]
+        },
+        "executionStats" : {
+                "executionSuccess" : true,
+                "nReturned" : 13832,
+                "executionTimeMillis" : 33,
+                "totalKeysExamined" : 13832,
+                "totalDocsExamined" : 13832,
+                "executionStages" : {
+                        "stage" : "FETCH",
+                        "nReturned" : 13832,
+                        "executionTimeMillisEstimate" : 2,
+                        "works" : 13833,
+                        "advanced" : 13832,
+                        "needTime" : 0,
+                        "needYield" : 0,
+                        "saveState" : 109,
+                        "restoreState" : 109,
+                        "isEOF" : 1,
+                        "docsExamined" : 13832,
+                        "alreadyHasObj" : 0,
+                        "inputStage" : {
+                                "stage" : "IXSCAN",
+                                "nReturned" : 13832,
+                                "executionTimeMillisEstimate" : 0,
+                                "works" : 13833,
+                                "advanced" : 13832,
+                                "needTime" : 0,
+                                "needYield" : 0,
+                                "saveState" : 109,
+                                "restoreState" : 109,
+                                "isEOF" : 1,
+                                "keyPattern" : {
+                                        "ano" : 1
+                                },
+                                "indexName" : "ano_1",
+                                "isMultiKey" : false,
+                                "multiKeyPaths" : {
+                                        "ano" : [ ]
+                                },
+                                "isUnique" : false,
+                                "isSparse" : false,
+                                "isPartial" : false,
+                                "indexVersion" : 2,
+                                "direction" : "forward",
+                                "indexBounds" : {
+                                        "ano" : [
+                                                "[\"1999\", \"1999\"]"
+                                        ]
+                                },
+                                "keysExamined" : 13832,
+                                "seeks" : 1,
+                                "dupsTested" : 0,
+                                "dupsDropped" : 0
+                        }
+                }
+        },
+        "serverInfo" : {
+                "host" : "b3dda8425431",
+                "port" : 27017,
+                "version" : "4.2.8",
+                "gitVersion" : "43d25964249164d76d5e04dd6cf38f6111e21f5f"
+        },
+        "ok" : 1
+}
+> exit
+bye
+[fb@cascao:/home/fb/workspaces/workspace-mongodb/mongodb-casadocodigo] 
+[fb@cascao:/home/fb/workspaces/workspace-mongodb/mongodb-casadocodigo] 
+[fb@cascao:/home/fb/workspaces/workspace-mongodb/mongodb-casadocodigo] 
+[fb@cascao:/home/fb/workspaces/workspace-mongodb/mongodb-casadocodigo] 
+[fb@cascao:/home/fb/workspaces/workspace-mongodb/mongodb-casadocodigo] 
+[fb@cascao:/home/fb/workspaces/workspace-mongodb/mongodb-casadocodigo] 
+[fb@cascao:/home/fb/workspaces/workspace-mongodb/mongodb-casadocodigo] mongo
+MongoDB shell version v4.4.0
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("ef0515a9-4b8e-43cb-a073-a92b23130444") }
+MongoDB server version: 4.2.8
+WARNING: shell and server versions do not match
+---
+The server generated these startup warnings when booting: 
+2020-08-16T16:15:20.251+0000 I  CONTROL  [initandlisten] 
+2020-08-16T16:15:20.251+0000 I  CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2020-08-16T16:15:20.251+0000 I  CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2020-08-16T16:15:20.251+0000 I  CONTROL  [initandlisten] 
+---
+---
+        Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+        metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+        The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+        and anyone you share the URL with. MongoDB may use this information to make product
+        improvements and to suggest MongoDB products and deployment options to you.
+
+        To enable free monitoring, run the following command: db.enableFreeMonitoring()
+        To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+> db.filmes.stats()
+{
+        "ns" : "test.filmes",
+        "size" : 568597297,
+        "count" : 1317734,
+        "avgObjSize" : 431,
+        "storageSize" : 240836608,
+        "capped" : false,
+        "wiredTiger" : {
+                "metadata" : {
+                        "formatVersion" : 1
+                },
+                "creationString" : "access_pattern_hint=none,allocation_size=4KB,app_metadata=(formatVersion=1),assert=(commit_timestamp=none,durable_timestamp=none,read_timestamp=none),block_allocation=best,block_compressor=snappy,cache_resident=false,checksum=on,colgroups=,collator=,columns=,dictionary=0,encryption=(keyid=,name=),exclusive=false,extractor=,format=btree,huffman_key=,huffman_value=,ignore_in_memory_cache_size=false,immutable=false,internal_item_max=0,internal_key_max=0,internal_key_truncate=true,internal_page_max=4KB,key_format=q,key_gap=10,leaf_item_max=0,leaf_key_max=0,leaf_page_max=32KB,leaf_value_max=64MB,log=(enabled=true),lsm=(auto_throttle=true,bloom=true,bloom_bit_count=16,bloom_config=,bloom_hash_count=8,bloom_oldest=false,chunk_count_limit=0,chunk_max=5GB,chunk_size=10MB,merge_custom=(prefix=,start_generation=0,suffix=),merge_max=15,merge_min=0),memory_page_image_max=0,memory_page_max=10m,os_cache_dirty_max=0,os_cache_max=0,prefix_compression=false,prefix_compression_min=4,source=,split_deepen_min_child=0,split_deepen_per_child=0,split_pct=90,type=file,value_format=u",
+                "type" : "file",
+                "uri" : "statistics:table:collection-20-9198816681613046445",
+                "LSM" : {
+                        "bloom filter false positives" : 0,
+                        "bloom filter hits" : 0,
+                        "bloom filter misses" : 0,
+                        "bloom filter pages evicted from cache" : 0,
+                        "bloom filter pages read into cache" : 0,
+                        "bloom filters in the LSM tree" : 0,
+                        "chunks in the LSM tree" : 0,
+                        "highest merge generation in the LSM tree" : 0,
+                        "queries that could have benefited from a Bloom filter that did not exist" : 0,
+                        "sleep for LSM checkpoint throttle" : 0,
+                        "sleep for LSM merge throttle" : 0,
+                        "total size of bloom filters" : 0
+                },
+                "block-manager" : {
+                        "allocations requiring file extension" : 0,
+                        "blocks allocated" : 0,
+                        "blocks freed" : 0,
+                        "checkpoint size" : 240029696,
+                        "file allocation unit size" : 4096,
+                        "file bytes available for reuse" : 790528,
+                        "file magic number" : 120897,
+                        "file major version number" : 1,
+                        "file size in bytes" : 240836608,
+                        "minor version number" : 0
+                },
+                "btree" : {
+                        "btree checkpoint generation" : 290,
+                        "column-store fixed-size leaf pages" : 0,
+                        "column-store internal pages" : 0,
+                        "column-store variable-size RLE encoded values" : 0,
+                        "column-store variable-size deleted values" : 0,
+                        "column-store variable-size leaf pages" : 0,
+                        "fixed-record size" : 0,
+                        "maximum internal page key size" : 368,
+                        "maximum internal page size" : 4096,
+                        "maximum leaf page key size" : 2867,
+                        "maximum leaf page size" : 32768,
+                        "maximum leaf page value size" : 67108864,
+                        "maximum tree depth" : 4,
+                        "number of key/value pairs" : 0,
+                        "overflow pages" : 0,
+                        "pages rewritten by compaction" : 0,
+                        "row-store empty values" : 0,
+                        "row-store internal pages" : 0,
+                        "row-store leaf pages" : 0
+                },
+                "cache" : {
+                        "bytes currently in the cache" : 639165210,
+                        "bytes dirty in the cache cumulative" : 0,
+                        "bytes read into cache" : 579677063,
+                        "bytes written from cache" : 0,
+                        "checkpoint blocked page eviction" : 0,
+                        "data source pages selected for eviction unable to be evicted" : 0,
+                        "eviction walk passes of a file" : 0,
+                        "eviction walk target pages histogram - 0-9" : 0,
+                        "eviction walk target pages histogram - 10-31" : 0,
+                        "eviction walk target pages histogram - 128 and higher" : 0,
+                        "eviction walk target pages histogram - 32-63" : 0,
+                        "eviction walk target pages histogram - 64-128" : 0,
+                        "eviction walks abandoned" : 0,
+                        "eviction walks gave up because they restarted their walk twice" : 0,
+                        "eviction walks gave up because they saw too many pages and found no candidates" : 0,
+                        "eviction walks gave up because they saw too many pages and found too few candidates" : 0,
+                        "eviction walks reached end of tree" : 0,
+                        "eviction walks started from root of tree" : 0,
+                        "eviction walks started from saved location in tree" : 0,
+                        "hazard pointer blocked page eviction" : 0,
+                        "in-memory page passed criteria to be split" : 0,
+                        "in-memory page splits" : 0,
+                        "internal pages evicted" : 0,
+                        "internal pages split during eviction" : 0,
+                        "leaf pages split during eviction" : 0,
+                        "modified pages evicted" : 0,
+                        "overflow pages read into cache" : 0,
+                        "page split during eviction deepened the tree" : 0,
+                        "page written requiring cache overflow records" : 0,
+                        "pages read into cache" : 11111,
+                        "pages read into cache after truncate" : 0,
+                        "pages read into cache after truncate in prepare state" : 0,
+                        "pages read into cache requiring cache overflow entries" : 0,
+                        "pages requested from the cache" : 57662,
+                        "pages seen by eviction walk" : 0,
+                        "pages written from cache" : 0,
+                        "pages written requiring in-memory restoration" : 0,
+                        "tracked dirty bytes in the cache" : 0,
+                        "unmodified pages evicted" : 0
+                },
+                "cache_walk" : {
+                        "Average difference between current eviction generation when the page was last considered" : 0,
+                        "Average on-disk page image size seen" : 0,
+                        "Average time in cache for pages that have been visited by the eviction server" : 0,
+                        "Average time in cache for pages that have not been visited by the eviction server" : 0,
+                        "Clean pages currently in cache" : 0,
+                        "Current eviction generation" : 0,
+                        "Dirty pages currently in cache" : 0,
+                        "Entries in the root page" : 0,
+                        "Internal pages currently in cache" : 0,
+                        "Leaf pages currently in cache" : 0,
+                        "Maximum difference between current eviction generation when the page was last considered" : 0,
+                        "Maximum page size seen" : 0,
+                        "Minimum on-disk page image size seen" : 0,
+                        "Number of pages never visited by eviction server" : 0,
+                        "On-disk page image sizes smaller than a single allocation unit" : 0,
+                        "Pages created in memory and never written" : 0,
+                        "Pages currently queued for eviction" : 0,
+                        "Pages that could not be queued for eviction" : 0,
+                        "Refs skipped during cache traversal" : 0,
+                        "Size of the root page" : 0,
+                        "Total number of pages currently in cache" : 0
+                },
+                "compression" : {
+                        "compressed page maximum internal page size prior to compression" : 4096,
+                        "compressed page maximum leaf page size prior to compression " : 131072,
+                        "compressed pages read" : 11062,
+                        "compressed pages written" : 0,
+                        "page written failed to compress" : 0,
+                        "page written was too small to compress" : 0
+                },
+                "cursor" : {
+                        "bulk loaded cursor insert calls" : 0,
+                        "cache cursors reuse count" : 2,
+                        "close calls that result in cache" : 0,
+                        "create calls" : 3,
+                        "insert calls" : 0,
+                        "insert key and value bytes" : 0,
+                        "modify" : 0,
+                        "modify key and value bytes affected" : 0,
+                        "modify value bytes modified" : 0,
+                        "next calls" : 1317735,
+                        "open cursor count" : 0,
+                        "operation restarted" : 0,
+                        "prev calls" : 0,
+                        "remove calls" : 0,
+                        "remove key bytes removed" : 0,
+                        "reserve calls" : 0,
+                        "reset calls" : 10752,
+                        "search calls" : 27866,
+                        "search near calls" : 10294,
+                        "truncate calls" : 0,
+                        "update calls" : 0,
+                        "update key and value bytes" : 0,
+                        "update value size change" : 0
+                },
+                "reconciliation" : {
+                        "dictionary matches" : 0,
+                        "fast-path pages deleted" : 0,
+                        "internal page key bytes discarded using suffix compression" : 0,
+                        "internal page multi-block writes" : 0,
+                        "internal-page overflow keys" : 0,
+                        "leaf page key bytes discarded using prefix compression" : 0,
+                        "leaf page multi-block writes" : 0,
+                        "leaf-page overflow keys" : 0,
+                        "maximum blocks required for a page" : 0,
+                        "overflow values written" : 0,
+                        "page checksum matches" : 0,
+                        "page reconciliation calls" : 0,
+                        "page reconciliation calls for eviction" : 0,
+                        "pages deleted" : 0
+                },
+                "session" : {
+                        "object compaction" : 0
+                },
+                "transaction" : {
+                        "update conflicts" : 0
+                }
+        },
+        "nindexes" : 1,
+        "indexBuilds" : [ ],
+        "totalIndexSize" : 17444864,
+        "indexSizes" : {
+                "_id_" : 17444864
+        },
+        "scaleFactor" : 1,
+        "ok" : 1
+}
+> db.filmes.find({"ano" :"1999"}).explain('executionStats')
+{
+        "queryPlanner" : {
+                "plannerVersion" : 1,
+                "namespace" : "test.filmes",
+                "indexFilterSet" : false,
+                "parsedQuery" : {
+                        "ano" : {
+                                "$eq" : "1999"
+                        }
+                },
+                "winningPlan" : {
+                        "stage" : "COLLSCAN",
+                        "filter" : {
+                                "ano" : {
+                                        "$eq" : "1999"
+                                }
+                        },
+                        "direction" : "forward"
+                },
+                "rejectedPlans" : [ ]
+        },
+        "executionStats" : {
+                "executionSuccess" : true,
+                "nReturned" : 13832,
+                "executionTimeMillis" : 567,
+                "totalKeysExamined" : 0,
+                "totalDocsExamined" : 1317734,
+                "executionStages" : {
+                        "stage" : "COLLSCAN",
+                        "filter" : {
+                                "ano" : {
+                                        "$eq" : "1999"
+                                }
+                        },
+                        "nReturned" : 13832,
+                        "executionTimeMillisEstimate" : 4,
+                        "works" : 1317736,
+                        "advanced" : 13832,
+                        "needTime" : 1303903,
+                        "needYield" : 0,
+                        "saveState" : 10294,
+                        "restoreState" : 10294,
+                        "isEOF" : 1,
+                        "direction" : "forward",
+                        "docsExamined" : 1317734
+                }
+        },
+        "serverInfo" : {
+                "host" : "b3dda8425431",
+                "port" : 27017,
+                "version" : "4.2.8",
+                "gitVersion" : "43d25964249164d76d5e04dd6cf38f6111e21f5f"
+        },
+        "ok" : 1
+}
+> db.filmes.find({"ano" :"1999"}).count()
+13832
+> db.filmes.count()
+1317734
+> db.filmes.createIndex( { "ano" : 1  } )
+{
+        "createdCollectionAutomatically" : false,
+        "numIndexesBefore" : 1,
+        "numIndexesAfter" : 2,
+        "ok" : 1
+}
+> db.filmes.find({"ano" :"1999"}).explain('executionStats')
+{
+        "queryPlanner" : {
+                "plannerVersion" : 1,
+                "namespace" : "test.filmes",
+                "indexFilterSet" : false,
+                "parsedQuery" : {
+                        "ano" : {
+                                "$eq" : "1999"
+                        }
+                },
+                "winningPlan" : {
+                        "stage" : "FETCH",
+                        "inputStage" : {
+                                "stage" : "IXSCAN",
+                                "keyPattern" : {
+                                        "ano" : 1
+                                },
+                                "indexName" : "ano_1",
+                                "isMultiKey" : false,
+                                "multiKeyPaths" : {
+                                        "ano" : [ ]
+                                },
+                                "isUnique" : false,
+                                "isSparse" : false,
+                                "isPartial" : false,
+                                "indexVersion" : 2,
+                                "direction" : "forward",
+                                "indexBounds" : {
+                                        "ano" : [
+                                                "[\"1999\", \"1999\"]"
+                                        ]
+                                }
+                        }
+                },
+                "rejectedPlans" : [ ]
+        },
+        "executionStats" : {
+                "executionSuccess" : true,
+                "nReturned" : 13832,
+                "executionTimeMillis" : 36,
+                "totalKeysExamined" : 13832,
+                "totalDocsExamined" : 13832,
+                "executionStages" : {
+                        "stage" : "FETCH",
+                        "nReturned" : 13832,
+                        "executionTimeMillisEstimate" : 3,
+                        "works" : 13833,
+                        "advanced" : 13832,
+                        "needTime" : 0,
+                        "needYield" : 0,
+                        "saveState" : 108,
+                        "restoreState" : 108,
+                        "isEOF" : 1,
+                        "docsExamined" : 13832,
+                        "alreadyHasObj" : 0,
+                        "inputStage" : {
+                                "stage" : "IXSCAN",
+                                "nReturned" : 13832,
+                                "executionTimeMillisEstimate" : 2,
+                                "works" : 13833,
+                                "advanced" : 13832,
+                                "needTime" : 0,
+                                "needYield" : 0,
+                                "saveState" : 108,
+                                "restoreState" : 108,
+                                "isEOF" : 1,
+                                "keyPattern" : {
+                                        "ano" : 1
+                                },
+                                "indexName" : "ano_1",
+                                "isMultiKey" : false,
+                                "multiKeyPaths" : {
+                                        "ano" : [ ]
+                                },
+                                "isUnique" : false,
+                                "isSparse" : false,
+                                "isPartial" : false,
+                                "indexVersion" : 2,
+                                "direction" : "forward",
+                                "indexBounds" : {
+                                        "ano" : [
+                                                "[\"1999\", \"1999\"]"
+                                        ]
+                                },
+                                "keysExamined" : 13832,
+                                "seeks" : 1,
+                                "dupsTested" : 0,
+                                "dupsDropped" : 0
+                        }
+                }
+        },
+        "serverInfo" : {
+                "host" : "b3dda8425431",
+                "port" : 27017,
+                "version" : "4.2.8",
+                "gitVersion" : "43d25964249164d76d5e04dd6cf38f6111e21f5f"
+        },
+        "ok" : 1
+}
+> db.filmes.createIndex( { "categorias" : 1  } )
+{
+        "createdCollectionAutomatically" : false,
+        "numIndexesBefore" : 2,
+        "numIndexesAfter" : 3,
+        "ok" : 1
+}
+> db.filmes.find({"categorias" :"Crime"}).explain('executionStats')
+{
+        "queryPlanner" : {
+                "plannerVersion" : 1,
+                "namespace" : "test.filmes",
+                "indexFilterSet" : false,
+                "parsedQuery" : {
+                        "categorias" : {
+                                "$eq" : "Crime"
+                        }
+                },
+                "winningPlan" : {
+                        "stage" : "FETCH",
+                        "inputStage" : {
+                                "stage" : "IXSCAN",
+                                "keyPattern" : {
+                                        "categorias" : 1
+                                },
+                                "indexName" : "categorias_1",
+                                "isMultiKey" : true,
+                                "multiKeyPaths" : {
+                                        "categorias" : [
+                                                "categorias"
+                                        ]
+                                },
+                                "isUnique" : false,
+                                "isSparse" : false,
+                                "isPartial" : false,
+                                "indexVersion" : 2,
+                                "direction" : "forward",
+                                "indexBounds" : {
+                                        "categorias" : [
+                                                "[\"Crime\", \"Crime\"]"
+                                        ]
+                                }
+                        }
+                },
+                "rejectedPlans" : [ ]
+        },
+        "executionStats" : {
+                "executionSuccess" : true,
+                "nReturned" : 45151,
+                "executionTimeMillis" : 95,
+                "totalKeysExamined" : 45151,
+                "totalDocsExamined" : 45151,
+                "executionStages" : {
+                        "stage" : "FETCH",
+                        "nReturned" : 45151,
+                        "executionTimeMillisEstimate" : 7,
+                        "works" : 45152,
+                        "advanced" : 45151,
+                        "needTime" : 0,
+                        "needYield" : 0,
+                        "saveState" : 352,
+                        "restoreState" : 352,
+                        "isEOF" : 1,
+                        "docsExamined" : 45151,
+                        "alreadyHasObj" : 0,
+                        "inputStage" : {
+                                "stage" : "IXSCAN",
+                                "nReturned" : 45151,
+                                "executionTimeMillisEstimate" : 5,
+                                "works" : 45152,
+                                "advanced" : 45151,
+                                "needTime" : 0,
+                                "needYield" : 0,
+                                "saveState" : 352,
+                                "restoreState" : 352,
+                                "isEOF" : 1,
+                                "keyPattern" : {
+                                        "categorias" : 1
+                                },
+                                "indexName" : "categorias_1",
+                                "isMultiKey" : true,
+                                "multiKeyPaths" : {
+                                        "categorias" : [
+                                                "categorias"
+                                        ]
+                                },
+                                "isUnique" : false,
+                                "isSparse" : false,
+                                "isPartial" : false,
+                                "indexVersion" : 2,
+                                "direction" : "forward",
+                                "indexBounds" : {
+                                        "categorias" : [
+                                                "[\"Crime\", \"Crime\"]"
+                                        ]
+                                },
+                                "keysExamined" : 45151,
+                                "seeks" : 1,
+                                "dupsTested" : 45151,
+                                "dupsDropped" : 0
+                        }
+                }
+        },
+        "serverInfo" : {
+                "host" : "b3dda8425431",
+                "port" : 27017,
+                "version" : "4.2.8",
+                "gitVersion" : "43d25964249164d76d5e04dd6cf38f6111e21f5f"
+        },
+        "ok" : 1
+}
+> db.filmes.createIndex( { "atores" : 1  } )
+{
+        "createdCollectionAutomatically" : false,
+        "numIndexesBefore" : 3,
+        "numIndexesAfter" : 4,
+        "ok" : 1
+}
+> db.filmes.createIndex( { "atores.sexo" : 1  } )
+{
+        "createdCollectionAutomatically" : false,
+        "numIndexesBefore" : 4,
+        "numIndexesAfter" : 5,
+        "ok" : 1
+}
+> db.filmes.find({"atores.sexo" :"M"}).explain('executionStats')
+{
+        "queryPlanner" : {
+                "plannerVersion" : 1,
+                "namespace" : "test.filmes",
+                "indexFilterSet" : false,
+                "parsedQuery" : {
+                        "atores.sexo" : {
+                                "$eq" : "M"
+                        }
+                },
+                "winningPlan" : {
+                        "stage" : "FETCH",
+                        "inputStage" : {
+                                "stage" : "IXSCAN",
+                                "keyPattern" : {
+                                        "atores.sexo" : 1
+                                },
+                                "indexName" : "atores.sexo_1",
+                                "isMultiKey" : true,
+                                "multiKeyPaths" : {
+                                        "atores.sexo" : [
+                                                "atores"
+                                        ]
+                                },
+                                "isUnique" : false,
+                                "isSparse" : false,
+                                "isPartial" : false,
+                                "indexVersion" : 2,
+                                "direction" : "forward",
+                                "indexBounds" : {
+                                        "atores.sexo" : [
+                                                "[\"M\", \"M\"]"
+                                        ]
+                                }
+                        }
+                },
+                "rejectedPlans" : [ ]
+        },
+        "executionStats" : {
+                "executionSuccess" : true,
+                "nReturned" : 937854,
+                "executionTimeMillis" : 1162,
+                "totalKeysExamined" : 937854,
+                "totalDocsExamined" : 937854,
+                "executionStages" : {
+                        "stage" : "FETCH",
+                        "nReturned" : 937854,
+                        "executionTimeMillisEstimate" : 137,
+                        "works" : 937855,
+                        "advanced" : 937854,
+                        "needTime" : 0,
+                        "needYield" : 0,
+                        "saveState" : 7327,
+                        "restoreState" : 7327,
+                        "isEOF" : 1,
+                        "docsExamined" : 937854,
+                        "alreadyHasObj" : 0,
+                        "inputStage" : {
+                                "stage" : "IXSCAN",
+                                "nReturned" : 937854,
+                                "executionTimeMillisEstimate" : 124,
+                                "works" : 937855,
+                                "advanced" : 937854,
+                                "needTime" : 0,
+                                "needYield" : 0,
+                                "saveState" : 7327,
+                                "restoreState" : 7327,
+                                "isEOF" : 1,
+                                "keyPattern" : {
+                                        "atores.sexo" : 1
+                                },
+                                "indexName" : "atores.sexo_1",
+                                "isMultiKey" : true,
+                                "multiKeyPaths" : {
+                                        "atores.sexo" : [
+                                                "atores"
+                                        ]
+                                },
+                                "isUnique" : false,
+                                "isSparse" : false,
+                                "isPartial" : false,
+                                "indexVersion" : 2,
+                                "direction" : "forward",
+                                "indexBounds" : {
+                                        "atores.sexo" : [
+                                                "[\"M\", \"M\"]"
+                                        ]
+                                },
+                                "keysExamined" : 937854,
+                                "seeks" : 1,
+                                "dupsTested" : 937854,
+                                "dupsDropped" : 0
+                        }
+                }
+        },
+        "serverInfo" : {
+                "host" : "b3dda8425431",
+                "port" : 27017,
+                "version" : "4.2.8",
+                "gitVersion" : "43d25964249164d76d5e04dd6cf38f6111e21f5f"
+        },
+        "ok" : 1
+}
+> db.filmes.createIndex( { "ano" : 1 , "nota" : -1  } )
+{
+        "createdCollectionAutomatically" : false,
+        "numIndexesBefore" : 5,
+        "numIndexesAfter" : 6,
+        "ok" : 1
+}
+> db.collection.getIndexes()
+[ ]
+> db.filmes.getIndexes()
+[
+        {
+                "v" : 2,
+                "key" : {
+                        "_id" : 1
+                },
+                "name" : "_id_",
+                "ns" : "test.filmes"
+        },
+        {
+                "v" : 2,
+                "key" : {
+                        "ano" : 1
+                },
+                "name" : "ano_1",
+                "ns" : "test.filmes"
+        },
+        {
+                "v" : 2,
+                "key" : {
+                        "categorias" : 1
+                },
+                "name" : "categorias_1",
+                "ns" : "test.filmes"
+        },
+        {
+                "v" : 2,
+                "key" : {
+                        "atores" : 1
+                },
+                "name" : "atores_1",
+                "ns" : "test.filmes"
+        },
+        {
+                "v" : 2,
+                "key" : {
+                        "atores.sexo" : 1
+                },
+                "name" : "atores.sexo_1",
+                "ns" : "test.filmes"
+        },
+        {
+                "v" : 2,
+                "key" : {
+                        "ano" : 1,
+                        "nota" : -1
+                },
+                "name" : "ano_1_nota_-1",
+                "ns" : "test.filmes"
+        }
+]
+> db.filmes.dropIndex("atores_1");
+{ "nIndexesWas" : 6, "ok" : 1 }
+> 
+> 
+> db.filmes.dropIndex("_id_")
+{
+        "ok" : 0,
+        "errmsg" : "cannot drop _id index",
+        "code" : 72,
+        "codeName" : "InvalidOptions"
+}
+> 
+> db.municipios_teste.createIndex({"nome":1}, { unique: true } )
+{
+        "ok" : 0,
+        "errmsg" : "E11000 duplicate key error collection: test.municipios_teste index: nome_1 dup key: { nome: \"Alagoinha\" }",
+        "code" : 11000,
+        "codeName" : "DuplicateKey",
+        "keyPattern" : {
+                "nome" : 1
+        },
+        "keyValue" : {
+                "nome" : "Alagoinha"
+        }
+}
+> db.municipios_teste.aggregate({ $group: 
+...    {_id: "$nome", count: { $sum: 1 }} },
+...    { $sort: { count: -1 } })
+{ "_id" : "São Domingos", "count" : 5 }
+{ "_id" : "Bom Jesus", "count" : 5 }
+{ "_id" : "Santa Helena", "count" : 4 }
+{ "_id" : "Planalto", "count" : 4 }
+{ "_id" : "Bonito", "count" : 4 }
+{ "_id" : "Santa Luzia", "count" : 4 }
+{ "_id" : "São Francisco", "count" : 4 }
+{ "_id" : "Vera Cruz", "count" : 4 }
+{ "_id" : "Santa Inês", "count" : 4 }
+{ "_id" : "Itambé", "count" : 3 }
+{ "_id" : "Bom Jardim", "count" : 3 }
+{ "_id" : "Nova Olinda", "count" : 3 }
+{ "_id" : "Santa Terezinha", "count" : 3 }
+{ "_id" : "Viçosa", "count" : 3 }
+{ "_id" : "Bom Sucesso", "count" : 3 }
+{ "_id" : "Cruzeiro do Sul", "count" : 3 }
+{ "_id" : "Novo Horizonte", "count" : 3 }
+{ "_id" : "Boa Esperança", "count" : 3 }
+{ "_id" : "Ouro Branco", "count" : 3 }
+{ "_id" : "Água Branca", "count" : 3 }
+Type "it" for more
+> db.municipios_teste.aggregate({ $group: 
+...   {_id:{nome: "$nome", estado:"$uf"} , count: { $sum: 1 }} },
+...   { $sort: { count: -1 } })
+{ "_id" : { "nome" : "Campos Borges", "estado" : "RS" }, "count" : 1 }
+{ "_id" : { "nome" : "Itapecerica", "estado" : "MG" }, "count" : 1 }
+{ "_id" : { "nome" : "Grão Mogol", "estado" : "MG" }, "count" : 1 }
+{ "_id" : { "nome" : "Moeda", "estado" : "MG" }, "count" : 1 }
+{ "_id" : { "nome" : "Mirador", "estado" : "MA" }, "count" : 1 }
+{ "_id" : { "nome" : "Itaí", "estado" : "SP" }, "count" : 1 }
+{ "_id" : { "nome" : "Canela", "estado" : "RS" }, "count" : 1 }
+{ "_id" : { "nome" : "São Gabriel", "estado" : "RS" }, "count" : 1 }
+{ "_id" : { "nome" : "São João dos Patos", "estado" : "MA" }, "count" : 1 }
+{ "_id" : { "nome" : "Leopoldina", "estado" : "MG" }, "count" : 1 }
+{ "_id" : { "nome" : "Boa Esperança do Iguaçu", "estado" : "PR" }, "count" : 1 }
+{ "_id" : { "nome" : "Ouro Velho", "estado" : "PB" }, "count" : 1 }
+{ "_id" : { "nome" : "Vitória de Santo Antão", "estado" : "PE" }, "count" : 1 }
+{ "_id" : { "nome" : "Itabuna", "estado" : "BA" }, "count" : 1 }
+{ "_id" : { "nome" : "Witmarsum", "estado" : "SC" }, "count" : 1 }
+{ "_id" : { "nome" : "Campo Redondo", "estado" : "RN" }, "count" : 1 }
+{ "_id" : { "nome" : "Piedade de Ponte Nova", "estado" : "MG" }, "count" : 1 }
+{ "_id" : { "nome" : "Silvianópolis", "estado" : "MG" }, "count" : 1 }
+{ "_id" : { "nome" : "Batayporã", "estado" : "MS" }, "count" : 1 }
+{ "_id" : { "nome" : "Cantá", "estado" : "RR" }, "count" : 1 }
+Type "it" for more
+> db.municipios_teste.createIndex({"nome":1,"estado":1}, 
+...   { unique: true } )
+{
+        "createdCollectionAutomatically" : false,
+        "numIndexesBefore" : 1,
+        "numIndexesAfter" : 2,
+        "ok" : 1
+}
+> 
+> db.operacoes.insert({"log":"usuário boaglio entrou","quando":new Date()})
+WriteResult({ "nInserted" : 1 })
+> db.operacoes.insert({"log":"usuário ezequiel entrou","quando":new Date()})
+WriteResult({ "nInserted" : 1 })
+> db.operacoes.insert({"log":"usuária elisa entrou","quando":new Date()})
+WriteResult({ "nInserted" : 1 })
+> db.operacoes.insert({"log":"usuária ágata saiu","quando":new Date()}) 
+WriteResult({ "nInserted" : 1 })
+> db.operacoes.insert({"log":"usuário marco saiu","quando":new Date()})
+WriteResult({ "nInserted" : 1 })
+> db.operacoes.insert({"log":"usuária michele entrou","quando":new  Date()})
+WriteResult({ "nInserted" : 1 })
+> db.operacoes.insert({"log":"usuário rafael entrou","quando":new Date()})
+WriteResult({ "nInserted" : 1 })
+> db.operacoes.insert({"log":"usuária joana saiu","quando":new Date()})
+WriteResult({ "nInserted" : 1 })
+> db.operacoes.insert({"log":"usuário fernando saiu","quando":new Date()})
+WriteResult({ "nInserted" : 1 })
+> 
+> db.operacoes.count()
+9
+> db.operacoes.createIndex( { "quando": 1 }, { expireAfterSeconds: 10 } )
+{
+        "createdCollectionAutomatically" : false,
+        "numIndexesBefore" : 1,
+        "numIndexesAfter" : 2,
+        "ok" : 1
+}
+> 
+> db.operacoes.count()
+9
+> 
+> db.operacoes.count()
+0
+> db.municipios.createIndex(
+...    { capital: 1 },
+...    { partialFilterExpression: { capital: { $eq: "S" }  } }
+... )
+{
+        "numIndexesBefore" : 3,
+        "numIndexesAfter" : 3,
+        "note" : "all indexes already exist",
+        "ok" : 1
+}
+> db.municipios.createIndex(
+...    { capital: 1 },
+...    { partialFilterExpression: { capital: { $eq: "S" }  } }
+... )
+{
+        "createdCollectionAutomatically" : false,
+        "numIndexesBefore" : 2,
+        "numIndexesAfter" : 3,
+        "ok" : 1
+}
+> db.textos.createIndex( {texto: "text"},
+...   {default_language: "portuguese"} )
+{
+        "ok" : 0,
+        "errmsg" : "Index: { v: 2, key: { _fts: \"text\", _ftsx: 1 }, name: \"texto_text\", ns: \"test.textos\", default_language: \"portuguese\", weights: { texto: 1 }, language_override: \"language\", textIndexVersion: 3 } already exists with different options: { v: 2, key: { _fts: \"text\", _ftsx: 1 }, name: \"$**_text\", ns: \"test.textos\", default_language: \"portuguese\", weights: { $**: 1 }, language_override: \"language\", textIndexVersion: 3 }",
+        "code" : 85,
+        "codeName" : "IndexOptionsConflict"
+}
+> db.textos.createIndex( {texto: "text"},
+...   {default_language: "portuguese"} )
+{
+        "createdCollectionAutomatically" : true,
+        "numIndexesBefore" : 1,
+        "numIndexesAfter" : 2,
+        "ok" : 1
+}
+> 
+> 
+> db.textos.insert({texto: "Eu gosto de São Paulo"})
+WriteResult({ "nInserted" : 1 })
+> WriteResult({ "nInserted" : 1 })
+uncaught exception: TypeError: bulkResult.upserted is undefined :
+WriteResult@src/mongo/shell/bulk_api.js:117:1
+WriteResult@src/mongo/shell/bulk_api.js:108:20
+@(shell):1:1
+> 
+> 
+>  db.textos.find( { $text: { $search: "ele gosta" } } )
+{ "_id" : ObjectId("5f3a136266600e2e75119cac"), "texto" : "Eu gosto de São Paulo" }
+> db.textos.find( { $text: { $search: "gostar" } } )
+{ "_id" : ObjectId("5f3a136266600e2e75119cac"), "texto" : "Eu gosto de São Paulo" }
+> db.textos.insert({texto:"Eu gosto de São Paulo e Rio Claro"})
+WriteResult({ "nInserted" : 1 })
+> db.textos.find( { $text: { $search: "gostar" } } )
+{ "_id" : ObjectId("5f3a136266600e2e75119cac"), "texto" : "Eu gosto de São Paulo" }
+{ "_id" : ObjectId("5f3a138f66600e2e75119cad"), "texto" : "Eu gosto de São Paulo e Rio Claro" }
+> db.textos.find( { $text: { $search: "gostar -claro" } } )
+{ "_id" : ObjectId("5f3a136266600e2e75119cac"), "texto" : "Eu gosto de São Paulo" }
+> db.textos.createIndex({ "$**": "text"},
+...   {default_language: "portuguese"} )
+{
+        "ok" : 0,
+        "errmsg" : "Index: { v: 2, key: { _fts: \"text\", _ftsx: 1 }, name: \"$**_text\", ns: \"test.textos\", default_language: \"portuguese\", weights: { $**: 1 }, language_override: \"language\", textIndexVersion: 3 } already exists with different options: { v: 2, key: { _fts: \"text\", _ftsx: 1 }, name: \"texto_text\", ns: \"test.textos\", default_language: \"portuguese\", weights: { texto: 1 }, language_override: \"language\", textIndexVersion: 3 }",
+        "code" : 85,
+        "codeName" : "IndexOptionsConflict"
+}
+> db.textos.createIndex({ "$**": "text"},
+...   {default_language: "portuguese"} )
+{
+        "createdCollectionAutomatically" : false,
+        "numIndexesBefore" : 1,
+        "numIndexesAfter" : 2,
+        "ok" : 1
+}
+> db.textos.insert({texto:"Eu gosto de Trantor",ficção:true})
+WriteResult({ "nInserted" : 1 })
+> db.textos.createIndex( {ficção: 1,  texto: "text"},
+...  {default_language: "portuguese"} )
+{
+        "ok" : 0,
+        "errmsg" : "only one text index per collection allowed, found existing text index \"$**_text\"",
+        "code" : 67,
+        "codeName" : "CannotCreateIndex"
+}
+> db.textos.find({$text:{$search:"gosto"},"ficção":true})
+{ "_id" : ObjectId("5f3a140266600e2e75119cae"), "texto" : "Eu gosto de Trantor", "ficção" : true }
+>  db.textos.createIndex( { "texto": 1},
+...  {background: true} );
+{
+        "createdCollectionAutomatically" : false,
+        "numIndexesBefore" : 2,
+        "numIndexesAfter" : 3,
+        "ok" : 1
+}
+> 

@@ -1,0 +1,4 @@
+{"_id":"1","nome":"Breaking Bad","personagens":[" Walter White "," Skyler White "," Jesse Pinkman "," Hank Schrader "," Marie Schrader  "," Saul Goodman "]}
+{"_id":"2","nome":"Chaves","personagens":["Seu Barriga","Quico","Chaves","Chiquinha","Nhonho","Dona Florinda"]}
+{"_id":"3","nome":"Carga Pesada","personagens":["Pedro da Boleia ","Bino ","Pedrinho ","","",""],"_class":"com.boaglio.casadocodigo.mongodb.Seriado"}
+{"_id":"10","personagens":["Michele","Joana","Rafael","Marco","Ezequiel","Fernando"],"nome":"3% - 3 por cento"}

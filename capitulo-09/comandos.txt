@@ -1,0 +1,107 @@
+> map = function() {
+...     emit(this.Acumulado , this.Ganhadores_Sena );
+... }
+function() {
+    emit(this.Acumulado , this.Ganhadores_Sena );
+}
+> reduce = function(Acumulado, Ganhadores_Sena) {
+...  return Array.sum(Ganhadores_Sena);
+... }
+function(Acumulado, Ganhadores_Sena) {
+ return Array.sum(Ganhadores_Sena);
+}
+> result = db.runCommand({
+...  "mapreduce" : "megasena",
+...  "map" : map,
+...  "reduce" : reduce,
+...  "out" : "ganhadores",
+...  "bypassDocumentValidation" : true
+... })
+{
+        "result" : "ganhadores",
+        "timeMillis" : 936,
+        "counts" : {
+                "input" : 2542,
+                "emit" : 2542,
+                "reduce" : 78,
+                "output" : 4
+        },
+        "ok" : 1
+}
+> db.ganhadores.find()
+{ "_id" : null, "value" : undefined }
+{ "_id" : "", "value" : "" }
+{ "_id" : "NÃO", "value" : 798 }
+{ "_id" : "SIM", "value" : 0 }
+> db.megasena.aggregate( { $group :
+...  {_id:null,
+...    soma:{$sum:"$Ganhadores_Sena"}
+...  }})
+{ "_id" : null, "soma" : 798 }
+>  db.megasena.aggregate( { $group :
+...        {_id:null,
+...          soma:{$sum:"$Ganhadores_Sena"}
+...          }});
+{ "_id" : null, "soma" : 798 }
+> db.megasena.aggregate({ $group: {
+...         _id: null,
+...         total: { $sum: 1 }    ,
+...         soma: { $sum: "$Ganhadores_Sena" } ,
+...         avg: { $avg: "$Ganhadores_Sena" }
+...     } })
+{ "_id" : null, "total" : 2542, "soma" : 798, "avg" : 0.35185185185185186 }
+> db.megasena.aggregate({ $group: {
+...         _id: null,
+...         total: { $sum: 1 }    ,
+...         soma: { $sum: "$Ganhadores_Sena" } ,
+...         avg: { $avg: "$Ganhadores_Sena" }
+...     } })
+{ "_id" : null, "total" : 2542, "soma" : 798, "avg" : 0.35185185185185186 }
+> db.megasena.aggregate({ $group: {
+...         _id: "$Acumulado",
+...         soma: { $sum: "$Ganhadores_Sena" }
+...     } })
+{ "_id" : "", "soma" : 0 }
+{ "_id" : null, "soma" : 0 }
+{ "_id" : "NÃO", "soma" : 798 }
+{ "_id" : "SIM", "soma" : 0 }
+> db.megasena.aggregate({ $group: {
+...         _id: "$Acumulado",
+...         soma: { $sum: "$Ganhadores_Sena" }
+...     }} ,
+...       { $match : { soma : { $gt : 0 }}}
+... )
+{ "_id" : "NÃO", "soma" : 798 }
+> db.megasena.aggregate({ $group: {
+...   _id: { ganhadores_sena:"$Ganhadores_Sena",
+...          acumulado:  "$Acumulado" },
+...    soma: { $sum: "$Ganhadores_Sena" }
+...   } },
+...   { $sort : { _id: -1 } }  )
+{ "_id" : { "ganhadores_sena" : "", "acumulado" : "" }, "soma" : 0 }
+{ "_id" : { "ganhadores_sena" : 52, "acumulado" : "NÃO" }, "soma" : 52 }
+{ "_id" : { "ganhadores_sena" : 17, "acumulado" : "NÃO" }, "soma" : 17 }
+{ "_id" : { "ganhadores_sena" : 15, "acumulado" : "NÃO" }, "soma" : 15 }
+{ "_id" : { "ganhadores_sena" : 7, "acumulado" : "NÃO" }, "soma" : 7 }
+{ "_id" : { "ganhadores_sena" : 6, "acumulado" : "NÃO" }, "soma" : 12 }
+{ "_id" : { "ganhadores_sena" : 5, "acumulado" : "NÃO" }, "soma" : 10 }
+{ "_id" : { "ganhadores_sena" : 4, "acumulado" : "NÃO" }, "soma" : 48 }
+{ "_id" : { "ganhadores_sena" : 3, "acumulado" : "NÃO" }, "soma" : 69 }
+{ "_id" : { "ganhadores_sena" : 2, "acumulado" : "NÃO" }, "soma" : 180 }
+{ "_id" : { "ganhadores_sena" : 1, "acumulado" : "NÃO" }, "soma" : 388 }
+{ "_id" : { "ganhadores_sena" : 0, "acumulado" : "SIM" }, "soma" : 0 }
+{ "_id" : {  }, "soma" : 0 }
+> db.megasena.aggregate({ $group: {
+...   _id: { ganhadores_sena:"$Ganhadores_Sena",
+...          acumulado:  "$Acumulado" },
+...          soma: { $sum: "$Ganhadores_Sena" }
+...    } },
+...     {
+...      $group: {
+...        _id: null,
+...        soma_total: { $sum: "$soma" }
+...      }
+...    } )
+{ "_id" : null, "soma_total" : 798 }
+> exit
+bye
