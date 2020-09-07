@@ -1,0 +1,86 @@
+version: '2'
+services:
+
+  ## Config Servers
+  config01:
+    image: mongo:4.2
+    command: mongod --port 27017 --configsvr --replSet configserver --oplogSize 16
+    ports:
+      - "26050:27017"    
+    volumes:
+      - ./mongodb-data-configSrv1:/data/db
+  config02:
+    image: mongo:4.2
+    command: mongod --port 27017 --configsvr --replSet configserver --oplogSize 16
+    ports:
+      - "26051:27017"      
+    volumes:
+      - ./mongodb-data-configSrv2:/data/db
+  config03:
+    image: mongo:4.2
+    command: mongod --port 27017 --configsvr --replSet configserver --oplogSize 16
+    ports:
+      - "26052:27017"      
+    volumes:
+      - ./mongodb-data-configSrv3:/data/db
+
+  ## Shards
+  shard01a:
+    image: mongo:4.2
+    command: mongod --port 27018 --shardsvr --replSet shard01 --oplogSize 16
+    ports:
+      - "31001:27018"      
+    volumes:
+      - ./mongodb-data-shard01a:/data/db
+  shard01b:
+    image: mongo:4.2
+    command: mongod --port 27018 --shardsvr --replSet shard01 --oplogSize 16
+    ports:
+      - "31002:27018"       
+    volumes:
+      - ./mongodb-data-shard01b:/data/db
+  shard02a:
+    image: mongo:4.2
+    command: mongod --port 27019 --shardsvr --replSet shard02 --oplogSize 16
+    ports:
+      - "31003:27019"      
+    volumes:
+      - ./mongodb-data-shard02a:/data/db
+  shard02b:
+    image: mongo:4.2
+    command: mongod --port 27019 --shardsvr --replSet shard02 --oplogSize 16
+    ports:
+      - "31004:27019"      
+    volumes:
+      - ./mongodb-data-shard02b:/data/db
+  shard03a:
+    image: mongo:4.2
+    command: mongod --port 27020 --shardsvr --replSet shard03 --oplogSize 16
+    ports:
+      - "31005:27020"      
+    volumes:
+      - ./mongodb-data-shard03a:/data/db
+  shard03b:
+    image: mongo:4.2
+    command: mongod --port 27020 --shardsvr --replSet shard03 --oplogSize 16
+    ports:
+      - "31006:27020"      
+    volumes:
+      - ./mongodb-data-shard03b:/data/db
+
+  ## Router
+  router:
+    image: mongo:4.2
+    command: mongos --port 27017 --configdb configserver/config01:27017,config02:27017,config03:27017 --bind_ip_all
+    ports:
+      - "27017:27017"
+    depends_on:
+      - config01
+      - config02
+      - config03
+      - shard01a
+      - shard01b
+      - shard02a
+      - shard02b
+      - shard03a
+      - shard03b

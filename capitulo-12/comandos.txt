@@ -1,0 +1,289 @@
+mongo
+MongoDB shell version v4.4.0
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+---
+The server generated these startup warnings when booting: 
+2020-09-07T15:59:08.093+0000 I  CONTROL  [main] 
+2020-09-07T15:59:08.093+0000 I  CONTROL  [main] ** WARNING: Access control is not enabled for the database.
+2020-09-07T15:59:08.093+0000 I  CONTROL  [main] **          Read and write access to data and configuration is unrestricted.
+2020-09-07T15:59:08.093+0000 I  CONTROL  [main] 
+---
+mongos> use test
+switched to db test
+mongos> sh.enableSharding("test");
+{
+        "ok" : 1,
+        "operationTime" : Timestamp(1599496228, 2),
+        "$clusterTime" : {
+                "clusterTime" : Timestamp(1599496228, 2),
+                "signature" : {
+                        "hash" : BinData(0,"AAAAAAAAAAAAAAAAAAAAAAAAAAA="),
+                        "keyId" : NumberLong(0)
+                }
+        }
+}
+mongos> db.filmes.find({"titulo": /Cinema Paradiso/})
+{ "_id" : 3407633, "titulo" : "Nuovo Cinema Paradiso (1988)", "ano" : "1988", "nota" : 8.5, "votos" : 153349, "categorias" : [ "Drama" ], "diretores" : [ "Tornatore, Giuseppe" ], "atores" : [ { "nome" : "Arbuckle, Roscoe 'Fatty'", "sexo" : "M" }, { "nome" : "Arcidiacono, Antonio", "sexo" : "M" }, { "nome" : "Balsamo, Ignazio", "sexo" : "M" }, { "nome" : "Barrymore, John (I)", "sexo" : "M" }, { "nome" : "Cannavale, Enzo", "sexo" : "M" }, { "nome" : "Cascio, Salvatore (I)", "sexo" : "M" }, { "nome" : "Castellani, Mario (I)", "sexo" : "M" }, { "nome" : "Castorino, Nicola", "sexo" : "M" }, { "nome" : "Catalano, Franco", "sexo" : "M" }, { "nome" : "Chaplin, Charles", "sexo" : "M" }, { "nome" : "Cimarosa, Tano", "sexo" : "M" }, { "nome" : "Cooper, Gary (I)", "sexo" : "M" }, { "nome" : "De Sica, Vittorio", "sexo" : "M" }, { "nome" : "Di Pinto, Nicola", "sexo" : "M" }, { "nome" : "Douglas, Kirk (I)", "sexo" : "M" }, { "nome" : "Flynn, Errol (I)", "sexo" : "M" }, { "nome" : "Gabin, Jean", "sexo" : "M" }, { "nome" : "Gable, Clark (I)", "sexo" : "M" }, { "nome" : "Gassman, Vittorio", "sexo" : "M" }, { "nome" : "Girotti, Massimo", "sexo" : "M" }, { "nome" : "Giuffrida, Turi", "sexo" : "M" }, { "nome" : "Granger, Farley", "sexo" : "M" }, { "nome" : "Grant, Cary (I)", "sexo" : "M" }, { "nome" : "Gullotta, Leo", "sexo" : "M" }, { "nome" : "Harvey, Laurence (I)", "sexo" : "M" }, { "nome" : "Jouvet, Louis", "sexo" : "M" }, { "nome" : "Killer, Turi", "sexo" : "M" }, { "nome" : "Leonardi, Marco", "sexo" : "M" }, { "nome" : "Libassi, Giorgio", "sexo" : "M" }, { "nome" : "Mastroianni, Marcello", "sexo" : "M" }, { "nome" : "Mignemi, Mimmo", "sexo" : "M" }, { "nome" : "Nazzari, Amedeo", "sexo" : "M" }, { "nome" : "Noiret, Philippe", "sexo" : "M" }, { "nome" : "Pappalardo, Ignazio", "sexo" : "M" }, { "nome" : "Pellegrino, Giuseppe", "sexo" : "M" }, { "nome" : "Perrin, Jacques", "sexo" : "M" }, { "nome" : "Sordi, Alberto", "sexo" : "M" }, { "nome" : "Stewart, James (I)", "sexo" : "M" }, { "nome" : "Terzo, Nino", "sexo" : "M" }, { "nome" : "Tornatore, Giuseppe", "sexo" : "M" }, { "nome" : "Tosto, Angelo", "sexo" : "M" }, { "nome" : "Totò", "sexo" : "M" }, { "nome" : "Tracy, Spencer (I)", "sexo" : "M" }, { "nome" : "Trieste, Leopoldo", "sexo" : "M" }, { "nome" : "Valentino, Rudolph (I)", "sexo" : "M" }, { "nome" : "Wayne, John (I)", "sexo" : "M" } ] }
+ 
+mongos> db.filmes.find({"titulo": /Cinema Paradiso/}).pretty()
+{
+        "_id" : 3407633,
+        "titulo" : "Nuovo Cinema Paradiso (1988)",
+        "ano" : "1988",
+        "nota" : 8.5,
+        "votos" : 153349,
+        "categorias" : [
+                "Drama"
+        ],
+        "diretores" : [
+                "Tornatore, Giuseppe"
+        ],
+        "atores" : [
+                {
+                        "nome" : "Arbuckle, Roscoe 'Fatty'",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Arcidiacono, Antonio",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Balsamo, Ignazio",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Barrymore, John (I)",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Cannavale, Enzo",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Cascio, Salvatore (I)",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Castellani, Mario (I)",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Castorino, Nicola",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Catalano, Franco",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Chaplin, Charles",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Cimarosa, Tano",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Cooper, Gary (I)",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "De Sica, Vittorio",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Di Pinto, Nicola",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Douglas, Kirk (I)",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Flynn, Errol (I)",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Gabin, Jean",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Gable, Clark (I)",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Gassman, Vittorio",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Girotti, Massimo",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Giuffrida, Turi",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Granger, Farley",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Grant, Cary (I)",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Gullotta, Leo",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Harvey, Laurence (I)",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Jouvet, Louis",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Killer, Turi",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Leonardi, Marco",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Libassi, Giorgio",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Mastroianni, Marcello",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Mignemi, Mimmo",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Nazzari, Amedeo",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Noiret, Philippe",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Pappalardo, Ignazio",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Pellegrino, Giuseppe",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Perrin, Jacques",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Sordi, Alberto",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Stewart, James (I)",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Terzo, Nino",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Tornatore, Giuseppe",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Tosto, Angelo",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Totò",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Tracy, Spencer (I)",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Trieste, Leopoldo",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Valentino, Rudolph (I)",
+                        "sexo" : "M"
+                },
+                {
+                        "nome" : "Wayne, John (I)",
+                        "sexo" : "M"
+                }
+        ]
+}
+mongos> db.filmes.ensureIndex({ "ano":"hashed"});
+{
+        "raw" : {
+                "shard02/shard02a:27019,shard02b:27019" : {
+                        "createdCollectionAutomatically" : false,
+                        "numIndexesBefore" : 1,
+                        "numIndexesAfter" : 2,
+                        "ok" : 1
+                }
+        },
+        "ok" : 1,
+        "operationTime" : Timestamp(1599498812, 1),
+        "$clusterTime" : {
+                "clusterTime" : Timestamp(1599498812, 1),
+                "signature" : {
+                        "hash" : BinData(0,"AAAAAAAAAAAAAAAAAAAAAAAAAAA="),
+                        "keyId" : NumberLong(0)
+                }
+        }
+}
+mongos> sh.shardCollection("test.filmes",{"ano":"hashed"})
+{
+        "collectionsharded" : "test.filmes",
+        "collectionUUID" : UUID("57a9d21f-3af0-43ae-9867-c2d462cd3ee1"),
+        "ok" : 1,
+        "operationTime" : Timestamp(1599498979, 21),
+        "$clusterTime" : {
+                "clusterTime" : Timestamp(1599498979, 21),
+                "signature" : {
+                        "hash" : BinData(0,"AAAAAAAAAAAAAAAAAAAAAAAAAAA="),
+                        "keyId" : NumberLong(0)
+                }
+        }
+}
+mongos> db.filmes.count()
+937854
+mongos> db.filmes.getShardDistribution()
+
+Shard shard02 at shard02/shard02a:27019,shard02b:27019
+ data : 151.27MiB docs : 296838 chunks : 5
+ estimated data per chunk : 30.25MiB
+ estimated docs per chunk : 59367
+
+Shard shard01 at shard01/shard01a:27018,shard01b:27018
+ data : 152.05MiB docs : 310227 chunks : 5
+ estimated data per chunk : 30.41MiB
+ estimated docs per chunk : 62045
+
+Shard shard03 at shard03/shard03a:27020,shard03b:27020
+ data : 163.37MiB docs : 330789 chunks : 5
+ estimated data per chunk : 32.67MiB
+ estimated docs per chunk : 66157
+
+Totals
+ data : 466.7MiB docs : 937854 chunks : 15
+ Shard shard02 contains 32.41% data, 31.65% docs in cluster, avg obj size on shard : 534B
+ Shard shard01 contains 32.58% data, 33.07% docs in cluster, avg obj size on shard : 513B
+ Shard shard03 contains 35% data, 35.27% docs in cluster, avg obj size on shard : 517B
+
+mongos> exit
+bye
+ 
