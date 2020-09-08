@@ -1,0 +1,141 @@
+# CONSOLE 1
+
+> rs.initiate()
+{
+        "info2" : "no configuration specified. Using a default configuration for the set",
+        "me" : "mongo-exemplo-transacao:27017",
+        "ok" : 1,
+        "$clusterTime" : {
+                "clusterTime" : Timestamp(1599536725, 1),
+                "signature" : {
+                        "hash" : BinData(0,"AAAAAAAAAAAAAAAAAAAAAAAAAAA="),
+                        "keyId" : NumberLong(0)
+                }
+        },
+        "operationTime" : Timestamp(1599536725, 1)
+}
+rs:SECONDARY> use test
+switched to db test
+rs:PRIMARY> db.contasBancarias.insert({nome:"Clarice Lispector",
+...   conta:"11111-2",saldo:20000});
+WriteResult({ "nInserted" : 1 })
+rs:PRIMARY> db.contasBancarias.insert({nome:"Cecília Meireles",
+...   conta:"33333-4",saldo:10000});
+WriteResult({ "nInserted" : 1 })
+rs:PRIMARY> db.contasBancarias.find({},{_id:0,nome:1,saldo:1})
+{ "nome" : "Clarice Lispector", "saldo" : 20000 }
+{ "nome" : "Cecília Meireles", "saldo" : 10000 }
+rs:PRIMARY> db.contasBancarias.update({ nome:"Clarice Lispector" },{ $inc: {"saldo": -1000 } })
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+rs:PRIMARY> db.contasBancarias.find({},{_id:0,nome:1,saldo:1})
+{ "nome" : "Clarice Lispector", "saldo" : 19000 }
+{ "nome" : "Cecília Meireles", "saldo" : 10000 }
+rs:PRIMARY> db.contasBancarias.update({ nome:"Cecília Meireles" },{ $inc: {"saldo": +1000 } })
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+rs:PRIMARY> db.contasBancarias.find({},{_id:0,nome:1,saldo:1})
+{ "nome" : "Clarice Lispector", "saldo" : 19000 }
+{ "nome" : "Cecília Meireles", "saldo" : 11000 }
+rs:PRIMARY> db.operacoes.insert({log:"$1.000 Clarice -> Cecília"})
+WriteResult({ "nInserted" : 1 })
+rs:PRIMARY> session = db.getMongo().startSession()
+session { "id" : UUID("a82e9b9c-5e45-4fba-bcd4-9a204c61a429") }
+rs:PRIMARY> session.startTransaction()
+rs:PRIMARY> session.getDatabase("test").contasBancarias.update(
+...    { nome:"Clarice Lispector" },
+...    { $inc: {"saldo": -5000 } }
+... )
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+rs:PRIMARY> db.contasBancarias.find({},{_id:0,nome:1,saldo:1})
+{ "nome" : "Clarice Lispector", "saldo" : 19000 }
+{ "nome" : "Cecília Meireles", "saldo" : 11000 }
+ 
+ 
+rs:PRIMARY> session = db.getMongo().startSession()
+session { "id" : UUID("d61d876b-f010-4061-ad79-00c23974e518") }
+rs:PRIMARY> session.startTransaction()
+rs:PRIMARY> operacoes = session.getDatabase("test").operacoes
+test.operacoes
+rs:PRIMARY> contasBancarias = session.getDatabase("test").contasBancarias
+test.contasBancarias
+rs:PRIMARY> contasBancarias.update({ nome:"Clarice Lispector" },{ $inc: {"saldo": -5000 } })
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+rs:PRIMARY> contasBancarias.update({ nome:"Cecília Meireles" },{ $inc: {"saldo": +5000 } })
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+rs:PRIMARY> operacoes.insert({log:"$5.000 Clarice -> Cecília"})
+WriteResult({ "nInserted" : 1 })
+rs:PRIMARY> session.commitTransaction()
+rs:PRIMARY> session.startTransaction()
+rs:PRIMARY> operacoes.insert({log:"consulta saldo - Clarice"})
+WriteResult({ "nInserted" : 1 })
+ rs:PRIMARY> session.getSessionId()
+{ "id" : UUID("d61d876b-f010-4061-ad79-00c23974e518") }
+rs:PRIMARY> session.abortTransaction()
+rs:PRIMARY> 
+rs:PRIMARY> 
+rs:PRIMARY> contasBancarias.find({},{_id:0,nome:1,saldo:1})
+{ "nome" : "Clarice Lispector", "saldo" : 14000 }
+{ "nome" : "Cecília Meireles", "saldo" : 16000 }
+rs:PRIMARY> contasBancarias.update({ nome:"Clarice Lispector" },{ $inc: {"saldo": -14000 } })^C
+ 
+
+# CONSOLE 2
+
+ 
+rs:PRIMARY> db.contasBancarias.find({},{_id:0,nome:1,saldo:1})
+{ "nome" : "Clarice Lispector", "saldo" : 19000 }
+{ "nome" : "Cecília Meireles", "saldo" : 11000 }
+ 
+rs:PRIMARY> db.operacoes.find()
+{ "_id" : ObjectId("5f56fff7e5311b7026b26deb"), "log" : "$1.000 Clarice -> Cecília" }
+ 
+rs:PRIMARY> db.operacoes.find()
+{ "_id" : ObjectId("5f56fff7e5311b7026b26deb"), "log" : "$1.000 Clarice -> Cecília" }
+{ "_id" : ObjectId("5f570897f4694d7803abcdde"), "log" : "$5.000 Clarice -> Cecília" }
+rs:PRIMARY> db.contasBancarias.find({},{_id:0,nome:1,saldo:1})
+{ "nome" : "Clarice Lispector", "saldo" : 14000 }
+{ "nome" : "Cecília Meireles", "saldo" : 16000 }
+ 
+rs:PRIMARY> db.operacoes.find({},{_id:0,log:1})
+{ "log" : "$1.000 Clarice -> Cecília" }
+{ "log" : "$5.000 Clarice -> Cecília" }
+rs:PRIMARY> session = db.getMongo().startSession()
+session { "id" : UUID("441833ae-7d26-4a14-8698-521e3aa71f72") }
+rs:PRIMARY> operacoes = session.getDatabase("test").operacoes
+test.operacoes
+rs:PRIMARY> operacoes.insert({log:"consulta saldo - Cecília"})
+WriteResult({ "nInserted" : 1 })
+ 
+rs:PRIMARY> session.abortTransaction()
+uncaught exception: Error: There is no active transaction to abort on this session. :
+abortTransaction@src/mongo/shell/session.js:710:23
+abortTransaction@src/mongo/shell/session.js:971:17
+@(shell):1:1
+rs:PRIMARY> exit
+ 
+rs:PRIMARY> session = db.getMongo().startSession()
+session { "id" : UUID("1c08d872-23f1-4add-9971-0374a115d5a4") }
+rs:PRIMARY> session.startTransaction()
+rs:PRIMARY> operacoes = session.getDatabase("test").operacoes
+test.operacoes
+rs:PRIMARY> contasBancarias = session.getDatabase("test").contasBancarias
+test.contasBancarias
+rs:PRIMARY> contasBancarias.update({ nome:"Clarice Lispector" },{ $inc: {"saldo": -14000 } })
+WriteCommandError({
+        "errorLabels" : [
+                "TransientTransactionError"
+        ],
+        "operationTime" : Timestamp(1599541126, 1),
+        "ok" : 0,
+        "errmsg" : "WriteConflict",
+        "code" : 112,
+        "codeName" : "WriteConflict",
+        "$clusterTime" : {
+                "clusterTime" : Timestamp(1599541126, 1),
+                "signature" : {
+                        "hash" : BinData(0,"AAAAAAAAAAAAAAAAAAAAAAAAAAA="),
+                        "keyId" : NumberLong(0)
+                }
+        }
+})
+rs:PRIMARY> exit
+bye 
