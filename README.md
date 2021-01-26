@@ -1,12 +1,11 @@
 mongodb-casadocodigo
 ====================
 
-MongoDB - Casa do código
 
-![Book cover](cover.jpg)
-
-Garanta o seu aqui:
-
-https://www.casadocodigo.com.br/products/livro-mongodb
-
-https://www.amazon.com.br/MongoDB-Construa-novas-aplica%C3%A7%C3%B5es-tecnologias-ebook/dp/B019OZ902U
+> ![Compre agora](https://github.com/boaglio/boaglio/blob/master/mongodb.png)
+>
+> :green_book: este repositório faz parte do livro *MongoDB*
+>
+> :face_with_head_bandage: [ajude o meu trabalho e compre uma cópia](https://www.casadocodigo.com.br/products/livro-mongodb)!
+>
+> custa menos que um :hamburger: lanche :fries:!
